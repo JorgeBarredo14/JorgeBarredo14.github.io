@@ -143,7 +143,7 @@ nav {
 }
 .cpill {
   display: inline-flex; align-items: center; gap: .42rem;
-  font-family: var(--m); font-size: .67rem; color: var(--t2);
+  font-family: var(--m); font-size: .69rem; color: var(--t2);
   padding: .36rem .85rem;
   background: rgba(255,255,255,.04);
   border: 1px solid var(--sep2); border-radius: 980px;
@@ -155,7 +155,7 @@ nav {
 /* keyword chips */
 .hero-chips { display: flex; flex-wrap: wrap; gap: .38rem; opacity:0; animation:up .45s .56s forwards; }
 .chip {
-  font-family: var(--m); font-size: .62rem; font-weight: 400; letter-spacing: .03em;
+  font-family: var(--m); font-size: .64rem; font-weight: 400; letter-spacing: .03em;
   padding: .25rem .7rem;
   background: var(--blue-s);
   border: 1px solid rgba(10,132,255,.18);
@@ -195,7 +195,7 @@ nav {
 .pub-yr { font-family:var(--m); font-size:.62rem; color:var(--blue); padding-top:.2rem; letter-spacing:.03em; }
 .pub-venue { font-family:var(--m); font-size:.6rem; color:var(--green); letter-spacing:.08em; text-transform:uppercase; margin-bottom:.3rem; }
 .pub-title { font-size:.94rem; font-weight:400; color:var(--t1); line-height:1.5; margin-bottom:.3rem; }
-.pub-authors { font-size:.78rem; color:var(--t2); font-style:italic; margin-bottom:.45rem; }
+.pub-authors { font-size:.8rem; color:var(--t2); font-style:italic; margin-bottom:.45rem; }
 .pub-award { font-family:var(--m); font-size:.6rem; color:var(--amber); background:rgba(255,214,10,.07); border:1px solid rgba(255,214,10,.2); padding:.16rem .55rem; border-radius:980px; display:inline-block; margin-bottom:.45rem; }
 .pub-actions { display:flex; gap:.4rem; flex-wrap:wrap; margin-top:.45rem; }
 .pub-btn { font-family:var(--m); font-size:.6rem; color:var(--t3); border:1px solid var(--sep2); padding:.18rem .55rem; border-radius:980px; transition:all .2s; cursor:pointer; background:none; }
@@ -244,7 +244,7 @@ pre.bib.open { display:block; }
 .ti-period { font-family:var(--m); font-size:.62rem; color:var(--t3); margin-bottom:.18rem; }
 .ti-org { font-size:.78rem; font-weight:400; color:var(--blue); margin-bottom:.18rem; }
 .ti-role { font-size:.92rem; color:var(--t1); font-weight:400; margin-bottom:.4rem; }
-.ti-desc { font-size:.82rem; color:var(--t2); line-height:1.68; max-width:400px; }
+.ti-desc { font-size:.84rem; color:var(--t2); line-height:1.68; max-width:400px; }
 .ti-link { font-family:var(--m); font-size:.62rem; color:var(--blue); border-bottom:1px solid rgba(10,132,255,.25); transition:border-color .2s; }
 .ti-link:hover { border-color:var(--blue); }
 .ti-tags { display:flex; flex-wrap:wrap; gap:.3rem; margin-top:.55rem; }
@@ -347,16 +347,19 @@ footer p { font-family:var(--m); font-size:.65rem; color:var(--t4); letter-spaci
     <h1 class="hero-name">Jorge Barredo<br>Ferreira</h1>
     <p class="hero-role">Embedded/Firmware Software Security Engineer &nbsp;·&nbsp; PhD in Industrial Cybersecurity</p>
     <p class="hero-bio">
-      I build <strong>firmware and IoT fuzzing pipelines</strong> — AFL++, libFuzzer, Firm-AFL/QEMU — 
-      and integrate electromagnetic, power, and timing side-channel signals when software coverage stalls.
-      PhD in Industrial Cybersecurity (Mondragon Unibertsitatea, cum laude).
-      Research stay at <strong>UCL</strong> (SOLAR Group).
-      Previous roles at Ericsson, DNV, and Barcelona Supercomputing Center.
+      I am a security engineer with a <strong>PhD in Industrial Cybersecurity</strong> and a track record
+      across embedded systems, 5G networks, industrial protocols, and high-performance computing.
+      I enjoy working at the boundary between hardware and software — finding vulnerabilities that
+      conventional tools miss, building the infrastructure to reproduce them, and understanding
+      <em>why</em> they exist at the hardware level.
+      I also have a genuine interest in <strong>AI and LLMs</strong>, which I have applied to
+      learning analytics, fuzzing seed generation, and vulnerability triage.
+      Research stay at <strong>University College London</strong>.
     </p>
     <div class="hero-contacts">
-      <a href="mailto:jorgebarredo14@gmail.com" class="cpill">
+      <a href="/cdn-cgi/l/email-protection#543e3b2633313635262631303b6560143339353d387a373b39" class="cpill">
         <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
-        jorgebarredo14@gmail.com
+        <span class="__cf_email__" data-cfemail="1872776a7f7d7a796a6a7d7c77292c587f75797174367b7775">[email&#160;protected]</span>
       </a>
       <a href="https://www.linkedin.com/in/jorge-barredo-ferreira" target="_blank" class="cpill">
         <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="4"/><path d="M7 10v7M7 7v.01M11 17v-4a2 2 0 0 1 4 0v4M11 10v7"/></svg>
@@ -390,6 +393,8 @@ footer p { font-family:var(--m); font-size:.65rem; color:var(--t4); letter-spaci
       <span class="chip">C · C++ · Python</span><span class="chip">Ghidra</span>
       <span class="chip">Docker · CI/CD</span><span class="chip">IEC 62443</span>
       <span class="chip">5G Core Security</span><span class="chip">Protocol Testing</span><span class="chip">FPGA</span>
+      <span class="chip">AI &amp; LLMs</span>
+      <span class="chip">Machine Learning</span>
     </div>
   </div>
   <div class="hero-photo-col">
@@ -411,6 +416,7 @@ footer p { font-family:var(--m); font-size:.65rem; color:var(--t4); letter-spaci
       <p>My PhD was carried out at <a href="https://www.ikerlan.es/en/" target="_blank">IKERLAN Technology Research Centre</a>, producing four frameworks — CARNYX, GJALLARHORN, GAFLERNA, and TRENTI — that integrate power, electromagnetic, and timing side-channel signals into fuzzing campaigns without source code access. I did a research stay at <a href="https://www.ucl.ac.uk/" target="_blank">University College London</a> as visiting PhD researcher in the <a href="https://solar.cs.ucl.ac.uk/" target="_blank">SOLAR Group</a>, collaborating with Prof. Justyna Petke and Prof. David Clark.</p>
       <p>Before my PhD I worked at <a href="https://www.ericsson.com" target="_blank">Ericsson</a> on 5G core security and cloud-native service mesh hardening, at <a href="https://www.dnv.com" target="_blank">DNV</a> on protocol conformance testing for energy and telecom devices, and at <a href="https://www.bsc.es" target="_blank">Barcelona Supercomputing Center</a> on FPGA acceleration for graph workloads.</p>
       <p>I hold two MSc degrees from <a href="https://www.uc3m.es" target="_blank">Universidad Carlos III de Madrid</a> — Cybersecurity and Telecommunication Engineering — and a BSc in Telecommunication Technologies from <a href="https://web.unican.es" target="_blank">Universidad de Cantabria</a> (Honours thesis, 10/10).</p>
+      <p>Beyond security, I have a genuine interest in <strong>AI and large language models</strong> — I have used them to generate fuzzing seeds for critical infrastructure software (published at CRITIS 2025), to build learning analytics tools, and for automated vulnerability triage. I find the intersection of AI and security one of the most exciting research directions today.</p>
     </div>
     <div class="stats stagger reveal">
       <div class="stat"><div class="stat-n">5</div><div class="stat-l">Publications</div></div>
@@ -593,7 +599,7 @@ footer p { font-family:var(--m); font-size:.65rem; color:var(--t4); letter-spaci
   <!-- Three signal channels -->
   <!-- EM channel -->
   <text x="16" y="45" font-family="-apple-system,sans-serif" font-size="7" fill="#0a84ff">EM</text>
-  <polyline points="30,50 45,48 55,43 65,38 75,42 85,50 95,51 105,49 115,46 125,42 135,36 145,50 155,51 165,49" fill="none" stroke="#0a84ff" stroke-width="1.2"/>
+  <polyline points="30,50 45,48 55,43 65,38 75,42 85,50 95,51 105,49 115,46 125,42 135,36 145,50 155,51 165,49 175,47 185,44 195,50 205,51 215,48 225,45" fill="none" stroke="#0a84ff" stroke-width="1.2"/>
   <!-- Power channel -->
   <text x="16" y="75" font-family="-apple-system,sans-serif" font-size="7" fill="#30d158">PWR</text>
   <polyline points="30,80 50,79 70,77 80,68 90,60 100,68 110,77 130,78 150,77 160,68 170,59 180,67 190,76" fill="none" stroke="#30d158" stroke-width="1.2"/>
@@ -765,7 +771,7 @@ footer p { font-family:var(--m); font-size:.65rem; color:var(--t4); letter-spaci
     <div class="fw-card reveal">
       <div class="fw-header">
         <div class="fw-name">CARNYX</div>
-        <p class="fw-tagline">Power side-channel analysis framework for pre-deployment vulnerability detection — 16 flaw classes, three hardware platforms, up to 99.69% recall, no source code required.</p>
+        <p class="fw-tagline">Power side-channel analysis framework for pre-deployment vulnerability detection — classifying <strong style="color:var(--t0)">16 flaw classes</strong> across three hardware platforms, up to 99.69% recall, no source code required.</p>
       </div>
       <div class="fw-img"><svg viewBox="0 0 420 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
   <defs>
@@ -805,7 +811,7 @@ footer p { font-family:var(--m); font-size:.65rem; color:var(--t4); letter-spaci
         <a href="https://github.com/JorgeBarredo14/CARNYX" target="_blank" class="fw-link">GitHub ↗</a>
       </div>
       <div class="fw-body">
-        <p>CARNYX establishes the series' core methodology: classify which type of software vulnerability is present in running firmware using only its <strong>power consumption signature</strong>, before any crash occurs. Current probe on supply rail, no firmware modification. An <strong>unsupervised HDBSCAN model</strong> builds a behavioural baseline; new traces are compared to detect and categorise deviations.</p>
+        <p>CARNYX establishes the series' core methodology: classify which type of software vulnerability is present in running firmware using only its <strong>power consumption signature</strong> — before any crash occurs. A current probe on the supply rail, no firmware modification. An <strong>unsupervised HDBSCAN model</strong> builds a behavioural baseline; new traces are compared to detect and categorise deviations across <strong>16 distinct flaw categories</strong>.</p>
         <div class="fw-results">
           <div class="res"><span class="res-lbl">Riscure Piñata (STM32F4)</span><div class="res-big g">99.69%</div><div class="res-sub">Recall — high-SNR security eval board</div></div>
           <div class="res"><span class="res-lbl">NUCLEO-144 · Serial</span><div class="res-big b">86.88%</div><div class="res-sub">Recall — standard dev board</div></div>
@@ -944,8 +950,8 @@ footer p { font-family:var(--m); font-size:.65rem; color:var(--t4); letter-spaci
         <div class="ti">
           <div class="ti-period">2022 – 2026</div>
           <div class="ti-org"><a href="https://www.mondragon.edu/en" target="_blank" class="ti-link">Mondragon Unibertsitatea</a> · <a href="https://www.ikerlan.es/en/" target="_blank" class="ti-link">IKERLAN</a></div>
-          <div class="ti-role">PhD in Industrial Cybersecurity — cum laude</div>
-          <p class="ti-desc">Novel Techniques for Embedded Fuzzing with Side-Channel Analysis and Seed Optimisation. Frameworks: CARNYX, GJALLARHORN, GAFLERNA, TRENTI. Supervised by Dr. Maialen Eceiza and Dr. Mikel Iturbe.</p>
+          <div class="ti-role">PhD in Industrial Cybersecurity — cum laude · International Doctorate Mention</div>
+          <p class="ti-desc">Novel Techniques for Embedded Fuzzing with Side-Channel Analysis and Seed Optimisation. Frameworks: CARNYX, GJALLARHORN, GAFLERNA, TRENTI. Supervised by Dr. Maialen Eceiza and Dr. Mikel Iturbe. International doctorate mention awarded for research stay at UCL.</p>
           <div class="ti-tags"><span class="ti-tag">Fuzzing</span><span class="ti-tag">SCA</span><span class="ti-tag">Embedded Security</span><span class="ti-tag">LLMs</span><span class="ti-tag">IoT</span></div>
         </div>
 
@@ -953,15 +959,15 @@ footer p { font-family:var(--m); font-size:.65rem; color:var(--t4); letter-spaci
           <div class="ti-period">2021 – 2022</div>
           <div class="ti-org"><a href="https://www.uc3m.es" target="_blank" class="ti-link">Universidad Carlos III de Madrid</a></div>
           <div class="ti-role">MSc in Cybersecurity (English) — 9.7/10</div>
-          <p class="ti-desc">Thesis: <a href="https://e-archivo.uc3m.es" target="_blank" class="ti-link">Protocol for Avoiding Negotiation Reset due to Eavesdropping in Quantum Key Distribution</a>.</p>
+          <p class="ti-desc">Thesis: <a href="https://e-archivo.uc3m.es" target="_blank" class="ti-link">Protocol for Avoiding Negotiation Reset due to Eavesdropping in Quantum Key Distribution</a>. Proposed a protocol improvement for QKD networks that prevents negotiation session resets caused by passive eavesdropping — a vulnerability in BB84-based implementations that can disrupt key exchange without triggering standard intrusion detection.</p>
           <div class="ti-tags"><span class="ti-tag">Cryptography</span><span class="ti-tag">QKD</span><span class="ti-tag">Network Security</span></div>
         </div>
 
         <div class="ti">
           <div class="ti-period">2020 – 2022</div>
           <div class="ti-org"><a href="https://www.uc3m.es" target="_blank" class="ti-link">Universidad Carlos III de Madrid</a></div>
-          <div class="ti-role">MSc in Telecommunication Engineering — 9.6/10</div>
-          <p class="ti-desc">Thesis: <a href="https://e-archivo.uc3m.es" target="_blank" class="ti-link">External Learning Analytics Tool for Aula Global Courses</a>.</p>
+          <div class="ti-role">MSc in Telecommunication Engineering (Bilingual) — 9.6/10</div>
+          <p class="ti-desc">Thesis: <a href="https://e-archivo.uc3m.es" target="_blank" class="ti-link">External Learning Analytics Tool for Aula Global Courses</a>. Designed and implemented an analytics platform integrating with UC3M's Aula Global (Moodle-based LMS) to provide instructors with interactive dashboards for monitoring student engagement, quiz performance, and activity patterns. This work later evolved into Statoodle.</p>
           <div class="ti-tags"><span class="ti-tag">Telecoms</span><span class="ti-tag">Learning Analytics</span><span class="ti-tag">Full-stack</span></div>
         </div>
 
@@ -969,7 +975,7 @@ footer p { font-family:var(--m); font-size:.65rem; color:var(--t4); letter-spaci
           <div class="ti-period">2016 – 2020</div>
           <div class="ti-org"><a href="https://web.unican.es" target="_blank" class="ti-link">Universidad de Cantabria</a></div>
           <div class="ti-role">BSc in Telecommunication Technologies (Telematics) — 10/10 Honours</div>
-          <p class="ti-desc">Thesis: <a href="https://repositorio.unican.es/xmlui/handle/10902/19013" target="_blank" class="ti-link">Accelerating PageRank with ZCU102-ES2 FPGA</a>. Supervised by Miquel Moretó Planas (<a href="https://www.bsc.es" target="_blank" class="ti-link">BSC</a>).</p>
+          <p class="ti-desc">Thesis: <a href="https://repositorio.unican.es/xmlui/handle/10902/19013" target="_blank" class="ti-link">Accelerating PageRank with ZCU102-ES2 FPGA</a>. Implemented the PageRank graph algorithm on the Xilinx ZCU102 UltraScale+ MPSoC, exploiting HW/SW co-design with Vivado HLS to achieve significant speedup over CPU baselines through memory access optimisation and pipeline parallelism. Supervised by Miquel Moretó Planas (<a href="https://www.bsc.es" target="_blank" class="ti-link">BSC</a>).</p>
           <div class="ti-tags"><span class="ti-tag">Telematics</span><span class="ti-tag">FPGA</span><span class="ti-tag">HPC</span><span class="ti-tag">PageRank</span><span class="ti-tag">Xilinx</span></div>
         </div>
 
@@ -994,9 +1000,9 @@ footer p { font-family:var(--m); font-size:.65rem; color:var(--t4); letter-spaci
       <p>Available for full-time positions, research collaborations, and consulting.</p>
     </div>
     <div class="clinks stagger reveal">
-      <a href="mailto:jorgebarredo14@gmail.com" class="clink">
+      <a href="/cdn-cgi/l/email-protection#89e3e6fbeeecebe8fbfbecede6b8bdc9eee4e8e0e5a7eae6e4" class="clink">
         <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
-        <span class="clink-lbl">Email</span><span class="clink-val">jorgebarredo14@gmail.com</span>
+        <span class="clink-lbl">Email</span><span class="clink-val"><span class="__cf_email__" data-cfemail="d5bfbaa7b2b0b7b4a7a7b0b1bae4e195b2b8b4bcb9fbb6bab8">[email&#160;protected]</span></span>
       </a>
       <a href="https://www.linkedin.com/in/jorge-barredo-ferreira" target="_blank" class="clink">
         <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="4"/><path d="M7 10v7M7 7v.01M11 17v-4a2 2 0 0 1 4 0v4M11 10v7"/></svg>
@@ -1034,7 +1040,7 @@ footer p { font-family:var(--m); font-size:.65rem; color:var(--t4); letter-spaci
   <p>Firmware Fuzzing · Embedded Security · Side-Channel Analysis</p>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // BibTeX toggle — uses pre.bib sibling
 function toggleBib(btn) {
   const actions = btn.closest('.pub-actions');
@@ -1063,6 +1069,7 @@ const obs = new IntersectionObserver((entries) => {
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
 // Nav active section highlight
+const se
 const secs = document.querySelectorAll('section[id]');
 const nls  = document.querySelectorAll('.nav-links a');
 const secObs = new IntersectionObserver(entries => {
