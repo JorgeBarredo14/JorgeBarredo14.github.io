@@ -246,9 +246,33 @@
 
   .about-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    grid-template-columns: 160px 1fr 1fr;
+    gap: 3rem;
     align-items: start;
+  }
+
+  .about-photo {
+    width: 160px; height: 200px;
+    border-radius: 3px;
+    border: 1px solid var(--border2);
+    object-fit: cover;
+    display: block;
+    background: var(--bg3);
+  }
+
+  .about-photo-placeholder {
+    width: 160px; height: 200px;
+    border-radius: 3px;
+    border: 2px dashed var(--border2);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: .5rem;
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .65rem;
+    text-align: center;
+    background: var(--bg3);
+    flex-shrink: 0;
   }
 
   .about-text p {
@@ -482,6 +506,45 @@
     line-height: 1.7;
   }
 
+  /* ── BIBTEX TOGGLE ── */
+  .pub-actions {
+    display: flex; gap: .6rem; margin-top: .7rem; flex-wrap: wrap; align-items: center;
+  }
+
+  .pub-link {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .62rem;
+    color: var(--sub);
+    text-decoration: none;
+    border: 1px solid var(--border2);
+    padding: .2rem .6rem;
+    border-radius: 2px;
+    letter-spacing: .08em;
+    transition: color .2s, border-color .2s;
+    cursor: pointer;
+    background: none;
+  }
+
+  .pub-link:hover { color: var(--accent); border-color: var(--accent2); }
+  .pub-link.doi { color: var(--accent); border-color: rgba(126,184,247,.25); }
+
+  .bibtex-block {
+    display: none;
+    margin-top: .8rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 1rem 1.2rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .7rem;
+    color: var(--sub);
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+
+  .bibtex-block.open { display: block; }
+
   /* ── CONTACT ── */
   #contact { border-top: 1px solid var(--border); }
 
@@ -578,7 +641,9 @@
 
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
-    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .about-photo-placeholder, .about-photo { width: 120px; height: 150px; }
+    .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
     .about-stats { grid-template-columns: 1fr 1fr; }
     .nav-links { display: none; }
     .pub-item { grid-template-columns: 1fr; gap: .5rem; }
@@ -605,11 +670,13 @@
   <section id="hero">
     <p class="hero-eyebrow">// Embedded Security · Fuzzing · Side-Channel Analysis</p>
     <h1 class="hero-name">Jorge<br><span>Barredo</span> Ferreira</h1>
-    <p class="hero-title">PhD Candidate · Embedded/Firmware Security Engineer</p>
+    <p class="hero-title">Doctor in Industrial Cybersecurity · Embedded/Firmware Security Engineer</p>
     <p class="hero-desc">
-      Researcher at IKERLAN Technology Research Centre and Mondragon Unibertsitatea.
-      I design novel fuzzing pipelines for embedded and IoT systems, integrating
-      electromagnetic and power side-channel analysis with LLM-assisted seed generation.
+      Security researcher at IKERLAN Technology Research Centre, with a PhD from Mondragon Unibertsitatea
+      and a research stay at <strong style="color:var(--text2)">University College London</strong>.
+      I specialise in firmware vulnerability discovery — building fuzzing pipelines that use
+      electromagnetic and power side-channel signals as hardware-level feedback to find bugs
+      that software-only tools miss.
     </p>
     <div class="hero-tags">
       <span class="tag">AFL++</span>
@@ -632,28 +699,33 @@
     <p class="section-label reveal">01 · About</p>
     <h2 class="section-title reveal">Background &amp;<br>Expertise</h2>
     <div class="about-grid">
+      <div class="reveal"><img src="data:image/jpeg;base64,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" class="about-photo" alt="Jorge Barredo Ferreira"></div>
       <div class="about-text reveal">
         <p>
-          I am a <strong>PhD candidate in Industrial Cybersecurity</strong> at Mondragon Unibertsitatea,
-          supervised by Dr. Maialen Eceiza Olaizola and Dr. Mikel Iturbe Urretxa,
-          with a research stay at <strong>University College London (UCL)</strong>.
+          I am a <strong>Doctor in Industrial Cybersecurity</strong> (Mondragon Unibertsitatea),
+          with a research stay at <strong>University College London (UCL)</strong> working with
+          Prof. Justyna Petke and Prof. David Clark at the CREST centre — one of the leading
+          software engineering research groups in Europe.
         </p>
         <p>
-          My doctoral work focuses on augmenting coverage-guided fuzzing with hardware-level
-          observability — combining <strong>electromagnetic, power, and timing side-channel signals</strong>
-          as runtime feedback to drive deeper exploration of embedded firmware targets.
+          My work sits at the intersection of <strong>firmware security and hardware observability</strong>.
+          I designed four research frameworks (CARNYX, GJALLARHORN, GAFLERNA, TRENTI) that integrate
+          electromagnetic and power side-channel signals into fuzzing campaigns, enabling
+          vulnerability detection on embedded targets without source code access or binary modification —
+          directly applicable to IoT, automotive, and industrial control systems.
         </p>
         <p>
-          Beyond academia, I bring industry experience from <strong>DNV</strong> (protocol testing),
-          <strong>Ericsson</strong> (5G core security), and <strong>Barcelona Supercomputing Center</strong>
-          (FPGA / HW-SW co-design). I hold two MSc degrees from <strong>Universidad Carlos III de Madrid</strong>
-          in Cybersecurity and Telecommunication Engineering.
+          Before my PhD I worked at <strong>Ericsson</strong> on 5G core network security,
+          at <strong>DNV</strong> on protocol testing for energy-sector devices, and at
+          <strong>Barcelona Supercomputing Center</strong> on FPGA acceleration.
+          I hold two MSc degrees (Cybersecurity + Telecommunication Engineering) from
+          <strong>Universidad Carlos III de Madrid</strong>.
         </p>
       </div>
       <div class="about-stats reveal">
         <div class="stat-card">
-          <div class="stat-number">4</div>
-          <div class="stat-label">Research Frameworks</div>
+          <div class="stat-number">6</div>
+          <div class="stat-label">Publications</div>
         </div>
         <div class="stat-card">
           <div class="stat-number">2×</div>
@@ -708,39 +780,113 @@
       <div class="pub-item reveal">
         <div class="pub-year">2025</div>
         <div class="pub-content">
-          <div class="pub-venue">IEEE EuroS&P — Under Review</div>
-          <div class="pub-title">TRENTI: Multimodal In-Loop Side-Channel Feedback for Embedded Fuzzing</div>
-          <div class="pub-authors">Jorge Barredo Ferreira, Maialen Eceiza Olaizola, Mikel Iturbe Urretxa</div>
+          <div class="pub-venue">Int. J. Information Security · Springer · Vol. 24, No. 4</div>
+          <div class="pub-title">CARNYX: A framework for vulnerability detection via power consumption analysis in embedded systems</div>
+          <div class="pub-authors">Jorge Barredo, Maialen Eceiza, Jose Luis Flores, Mikel Iturbe</div>
+          <div class="pub-actions">
+            <a href="https://doi.org/10.1007/s10207-025-01092-2" target="_blank" class="pub-link doi">DOI ↗</a>
+            <a href="https://link.springer.com/content/pdf/10.1007/s10207-025-01092-2.pdf" target="_blank" class="pub-link">PDF ↗</a>
+            <button class="pub-link" onclick="toggleBib(this)">BibTeX</button>
+          </div>
+          <div class="bibtex-block">@article{Barredo2025Carnyx,
+  title   = {CARNYX: A framework for vulnerability detection via power consumption analysis in embedded systems},
+  author  = {Barredo, Jorge and Eceiza, Maialen and Flores, Jose Luis and Iturbe, Mikel},
+  journal = {International Journal of Information Security},
+  volume  = {24},
+  number  = {4},
+  pages   = {172},
+  year    = {2025},
+  doi     = {10.1007/s10207-025-01092-2}
+}</div>
         </div>
       </div>
 
       <div class="pub-item reveal">
         <div class="pub-year">2025</div>
         <div class="pub-content">
-          <div class="pub-venue">ACM TOSEM / FSE 2025 — Under Review</div>
-          <div class="pub-title">GAFLERNA: Electromagnetic Side-Channel Guided Fuzzing for Embedded Systems</div>
-          <div class="pub-authors">Jorge Barredo Ferreira, Maialen Eceiza Olaizola, Mikel Iturbe Urretxa</div>
+          <div class="pub-venue">Computers &amp; Security · Elsevier · Oct 2025</div>
+          <div class="pub-title">GJALLARHORN: A framework for vulnerability detection via electromagnetic side-channel analysis in embedded systems</div>
+          <div class="pub-authors">Jorge Barredo, Maialen Eceiza, Jose Luis Flores, Mikel Iturbe</div>
+          <div class="pub-actions">
+            <a href="https://doi.org/10.1016/j.cose.2025.104692" target="_blank" class="pub-link doi">DOI ↗</a>
+            <button class="pub-link" onclick="toggleBib(this)">BibTeX</button>
+          </div>
+          <div class="bibtex-block">@article{Barredo2025Gjallarhorn,
+  title   = {GJALLARHORN: A framework for vulnerability detection via electromagnetic side-channel analysis in embedded systems},
+  author  = {Barredo, Jorge and Eceiza, Maialen and Flores, Jose Luis and Iturbe, Mikel},
+  journal = {Computers \& Security},
+  pages   = {104692},
+  year    = {2025},
+  doi     = {10.1016/j.cose.2025.104692}
+}</div>
         </div>
       </div>
 
       <div class="pub-item reveal">
-        <div class="pub-year">2024</div>
+        <div class="pub-year">2025</div>
         <div class="pub-content">
-          <div class="pub-venue">CRITIS 2024 — Young Researcher Award</div>
+          <div class="pub-venue">ACM FSE 2025 · Trondheim, Norway · pp. 550–554</div>
+          <div class="pub-title">GAFLERNA Ahoy! Integrating EM Side-Channel Analysis into Traditional Fuzzing Workflows</div>
+          <div class="pub-authors">Jorge Barredo, Justyna Petke, David Clark, Dan Blackwell, Maialen Eceiza, Jose Luis Flores, Mikel Iturbe</div>
+          <div class="pub-actions">
+            <a href="https://doi.org/10.1145/3696630.3728497" target="_blank" class="pub-link doi">DOI ↗</a>
+            <a href="https://dl.acm.org/doi/pdf/10.1145/3696630.3728497" target="_blank" class="pub-link">PDF ↗</a>
+            <button class="pub-link" onclick="toggleBib(this)">BibTeX</button>
+          </div>
+          <div class="bibtex-block">@inproceedings{Barredo2025Gaflerna,
+  title     = {GAFLERNA Ahoy! Integrating EM Side-Channel Analysis into Traditional Fuzzing Workflows},
+  author    = {Barredo, Jorge and Petke, Justyna and Clark, David and Blackwell, Dan and Eceiza, Maialen and Flores, Jose Luis and Iturbe, Mikel},
+  booktitle = {Proceedings of the 33rd ACM International Conference on the Foundations of Software Engineering},
+  pages     = {550--554},
+  year      = {2025},
+  location  = {Trondheim, Norway},
+  doi       = {10.1145/3696630.3728497}
+}</div>
+        </div>
+      </div>
+
+      <div class="pub-item reveal">
+        <div class="pub-year">2025</div>
+        <div class="pub-content">
+          <div class="pub-venue">CRITIS 2025 · Jönköping, Sweden</div>
           <div class="pub-title">
             Sow Smarter, Not Harder: Evaluating LLM-generated Seeds for Fuzzing Critical Infrastructure
             <span class="pub-award">🥈 2nd Place · Young CRITIS Award</span>
           </div>
-          <div class="pub-authors">Jorge Barredo Ferreira et al.</div>
+          <div class="pub-authors">Jorge Barredo, Maialen Eceiza, Jose Luis Flores, Mikel Iturbe</div>
+          <div class="pub-actions">
+            <button class="pub-link" onclick="toggleBib(this)">BibTeX</button>
+          </div>
+          <div class="bibtex-block">@inproceedings{Barredo2025Sow,
+  title     = {Sow Smarter, Not Harder: Evaluating LLM-generated Seeds for Fuzzing Critical Infrastructure},
+  author    = {Barredo, Jorge and Eceiza, Maialen and Flores, Jose Luis and Iturbe, Mikel},
+  booktitle = {Proceedings of the 20th International Conference on Critical Information Infrastructures Security (CRITIS 2025)},
+  year      = {2025},
+  month     = oct,
+  location  = {J{\"o}nk{\"o}ping, Sweden}
+}</div>
         </div>
       </div>
 
       <div class="pub-item reveal">
-        <div class="pub-year">2024</div>
+        <div class="pub-year">2023</div>
         <div class="pub-content">
-          <div class="pub-venue">IET Information Security — In Preparation</div>
-          <div class="pub-title">Cross-Modal Triangulation of EM Anomalies and Software Evidence for Hardware Vulnerability Diagnosis</div>
-          <div class="pub-authors">Jorge Barredo Ferreira, Maialen Eceiza Olaizola, Mikel Iturbe Urretxa</div>
+          <div class="pub-venue">EC-TEL 2023 · Springer LNCS vol. 14200</div>
+          <div class="pub-title">Statoodle: A Learning Analytics Tool to Analyze Moodle Students' Actions and Prevent Cheating</div>
+          <div class="pub-authors">Pedro M. Moreno-Marcos, Jorge Barredo, Pedro J. Muñoz-Merino, Carlos Delgado Kloos</div>
+          <div class="pub-actions">
+            <a href="https://doi.org/10.1007/978-3-031-42682-7_70" target="_blank" class="pub-link doi">DOI ↗</a>
+            <button class="pub-link" onclick="toggleBib(this)">BibTeX</button>
+          </div>
+          <div class="bibtex-block">@inproceedings{MorenoMarcos2023Statoodle,
+  title     = {Statoodle: A Learning Analytics Tool to Analyze Moodle Students' Actions and Prevent Cheating},
+  author    = {Moreno-Marcos, Pedro M. and Barredo, Jorge and Mu{\~n}oz-Merino, Pedro J. and Delgado Kloos, Carlos},
+  booktitle = {Responsive and Sustainable Educational Futures. EC-TEL 2023},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {14200},
+  year      = {2023},
+  doi       = {10.1007/978-3-031-42682-7_70}
+}</div>
         </div>
       </div>
 
@@ -808,13 +954,13 @@
     <div class="contact-grid">
       <div class="contact-intro reveal">
         <p>
-          Open to opportunities at the intersection of <strong style="color:var(--text2)">embedded security,
-          firmware vulnerability research, and systems engineering</strong>. Currently exploring
-          roles in industry R&amp;D and advanced security research.
+          Open to roles in <strong style="color:var(--text2)">embedded security engineering,
+          firmware vulnerability research, and hardware security R&amp;D</strong> — at companies
+          pushing the frontier of secure silicon, IoT, automotive, or critical infrastructure.
         </p>
         <br>
         <p>
-          PhD defence imminent — available to discuss full-time positions,
+          Recently defended my PhD and available immediately for full-time positions,
           research collaborations, or consulting engagements.
         </p>
       </div>
@@ -823,17 +969,19 @@
           <span class="contact-link-icon">LinkedIn</span>
           <span class="contact-link-text">jorge-barredo-ferreira</span>
         </a>
-        <a href="https://scholar.google.com" target="_blank" class="contact-link">
+        <a href="https://scholar.google.com/citations?user=bIaiqcYAAAAJ" target="_blank" class="contact-link">
           <span class="contact-link-icon">Scholar</span>
           <span class="contact-link-text">Google Scholar Profile</span>
         </a>
-        <a href="https://github.com" target="_blank" class="contact-link">
+        <a href="https://github.com/JorgeBarredo14" target="_blank" class="contact-link">
           <span class="contact-link-icon">GitHub</span>
-          <span class="contact-link-text">Research code &amp; tools</span>
+          <span class="contact-link-text">JorgeBarredo14</span>
         </a>
-        <a href="mailto:jorge.barredo@ikerlan.es" class="contact-link">
+        <a href="mailto:jorgebarredo14@gmail.com" class="contact-link">
           <span class="contact-link-icon">Email</span>
-          <span class="contact-link-text">jorge.barredo@ikerlan.es</span>
+          <span class="contact-link-text">jorgebarredo14@gmail.com</span>
+        </a>
+      </div>
         </a>
       </div>
     </div>
@@ -846,7 +994,14 @@
   <p>Embedded Security · Fuzzing · Side-Channel Analysis</p>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // BibTeX toggle
+  function toggleBib(btn) {
+    const block = btn.closest('.pub-content').querySelector('.bibtex-block');
+    block.classList.toggle('open');
+    btn.textContent = block.classList.contains('open') ? 'BibTeX ✕' : 'BibTeX';
+  }
+
   // Intersection Observer for reveal animations
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
@@ -866,15 +1021,4 @@
   const navObs = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        navLinks.forEach(a => {
-          a.style.color = a.getAttribute('href') === '#' + entry.target.id
-            ? 'var(--accent)' : '';
-        });
-      }
-    });
-  }, { threshold: 0.4 });
-
-  sections.forEach(s => navObs.observe(s));
-</script>
-</body>
-</html>
+        navLink
