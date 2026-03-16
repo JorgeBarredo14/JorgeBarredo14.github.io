@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jorge Barredo Ferreira — Security Researcher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,300&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:       #0a0a0c;
+    --bg2:      #101014;
+    --bg3:      #16161c;
+    --border:   #1f1f28;
+    --border2:  #2a2a36;
+    --accent:   #7eb8f7;
+    --accent2:  #4e90d8;
+    --green:    #5ccb8a;
+    --amber:    #e8b84b;
+    --muted:    #3a3a50;
+    --sub:      #6b6b88;
+    --text:     #c8c8d8;
+    --text2:    #e8e8f0;
+    --white:    #f2f2f8;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0; opacity: .4;
+  }
+
+  /* ── GRID BACKGROUND ── */
+  body::after {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 48px 48px;
+    opacity: 0.25;
+    pointer-events: none; z-index: 0;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 clamp(1.5rem, 5vw, 4rem);
+    height: 60px;
+    background: rgba(10,10,12,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .8rem;
+    color: var(--accent);
+    letter-spacing: .08em;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex; gap: 2rem; list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .72rem;
+    color: var(--sub);
+    text-decoration: none;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    transition: color .2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── MAIN LAYOUT ── */
+  main { position: relative; z-index: 1; }
+
+  section {
+    padding: clamp(5rem, 10vw, 8rem) clamp(1.5rem, 10vw, 12rem);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding-top: 100px;
+  }
+
+  .hero-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .72rem;
+    color: var(--accent);
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp .6s .2s forwards;
+  }
+
+  .hero-name {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 300;
+    font-size: clamp(2.8rem, 7vw, 6rem);
+    line-height: 1.05;
+    color: var(--white);
+    letter-spacing: -.02em;
+    margin-bottom: 1.2rem;
+    opacity: 0;
+    animation: fadeUp .7s .35s forwards;
+  }
+
+  .hero-name span {
+    color: var(--accent);
+  }
+
+  .hero-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: clamp(.85rem, 2vw, 1.05rem);
+    color: var(--sub);
+    font-style: italic;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp .7s .5s forwards;
+  }
+
+  .hero-desc {
+    max-width: 580px;
+    font-size: 1.05rem;
+    color: var(--text);
+    line-height: 1.8;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp .7s .65s forwards;
+  }
+
+  .hero-tags {
+    display: flex; flex-wrap: wrap; gap: .6rem;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp .7s .8s forwards;
+  }
+
+  .tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .68rem;
+    letter-spacing: .1em;
+    padding: .35rem .85rem;
+    border: 1px solid var(--border2);
+    color: var(--sub);
+    border-radius: 2px;
+    text-transform: uppercase;
+    transition: border-color .2s, color .2s;
+  }
+
+  .tag:hover { border-color: var(--accent2); color: var(--accent); }
+
+  .hero-cta {
+    display: flex; gap: 1.2rem; flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp .7s .95s forwards;
+  }
+
+  .btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .78rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: .85rem 2rem;
+    border-radius: 2px;
+    transition: all .25s;
+    display: inline-block;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #0a0a0c;
+    border: 1px solid var(--accent);
+  }
+
+  .btn-primary:hover {
+    background: transparent;
+    color: var(--accent);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--sub);
+    border: 1px solid var(--border2);
+  }
+
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ── SECTION HEADERS ── */
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .68rem;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    display: flex; align-items: center; gap: .8rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1; max-width: 80px;
+    height: 1px;
+    background: var(--border2);
+  }
+
+  .section-title {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 300;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: var(--white);
+    letter-spacing: -.02em;
+    margin-bottom: 3.5rem;
+    line-height: 1.15;
+  }
+
+  /* ── ABOUT ── */
+  #about { border-top: 1px solid var(--border); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    margin-bottom: 1.2rem;
+    color: var(--text);
+    font-size: 1rem;
+  }
+
+  .about-text strong { color: var(--text2); font-weight: 500; }
+
+  .about-stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+  }
+
+  .stat-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    border-radius: 3px;
+    transition: border-color .2s;
+  }
+
+  .stat-card:hover { border-color: var(--border2); }
+
+  .stat-number {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 2rem;
+    color: var(--accent);
+    font-weight: 500;
+    line-height: 1;
+    margin-bottom: .4rem;
+  }
+
+  .stat-label {
+    font-size: .8rem;
+    color: var(--sub);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+  }
+
+  /* ── RESEARCH ── */
+  #research { border-top: 1px solid var(--border); }
+
+  .research-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .research-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color .25s, transform .25s;
+    cursor: default;
+  }
+
+  .research-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent2), transparent);
+    opacity: 0;
+    transition: opacity .3s;
+  }
+
+  .research-card:hover { border-color: var(--border2); transform: translateY(-3px); }
+  .research-card:hover::before { opacity: 1; }
+
+  .research-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .62rem;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(126,184,247,.08);
+    border: 1px solid rgba(126,184,247,.15);
+    padding: .25rem .7rem;
+    border-radius: 2px;
+    display: inline-block;
+    margin-bottom: 1.2rem;
+  }
+
+  .research-card h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: .8rem;
+    letter-spacing: .02em;
+  }
+
+  .research-card p {
+    font-size: .88rem;
+    color: var(--sub);
+    line-height: 1.7;
+  }
+
+  /* ── PUBLICATIONS ── */
+  #publications { border-top: 1px solid var(--border); }
+
+  .pub-list { display: flex; flex-direction: column; gap: 1.2rem; }
+
+  .pub-item {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-left: 3px solid transparent;
+    padding: 1.8rem 2rem;
+    border-radius: 0 3px 3px 0;
+    transition: border-left-color .2s, background .2s;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .pub-item:hover {
+    border-left-color: var(--accent);
+    background: var(--bg3);
+  }
+
+  .pub-year {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .7rem;
+    color: var(--accent);
+    padding-top: .2rem;
+    white-space: nowrap;
+    letter-spacing: .05em;
+  }
+
+  .pub-content {}
+
+  .pub-venue {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .65rem;
+    color: var(--green);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    margin-bottom: .4rem;
+  }
+
+  .pub-title {
+    font-size: .98rem;
+    font-weight: 400;
+    color: var(--text2);
+    margin-bottom: .4rem;
+    line-height: 1.5;
+  }
+
+  .pub-authors {
+    font-size: .82rem;
+    color: var(--sub);
+    font-style: italic;
+  }
+
+  .pub-award {
+    display: inline-flex; align-items: center; gap: .4rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .62rem;
+    color: var(--amber);
+    background: rgba(232,184,75,.07);
+    border: 1px solid rgba(232,184,75,.2);
+    padding: .2rem .6rem;
+    border-radius: 2px;
+    margin-left: .8rem;
+    vertical-align: middle;
+    letter-spacing: .08em;
+  }
+
+  /* ── EXPERIENCE ── */
+  #experience { border-top: 1px solid var(--border); }
+
+  .timeline { position: relative; padding-left: 2rem; }
+
+  .timeline::before {
+    content: '';
+    position: absolute; left: 0; top: .5rem; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--accent2), transparent);
+  }
+
+  .timeline-item {
+    position: relative;
+    padding-bottom: 3rem;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute; left: -2rem;
+    top: .45rem;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 1px solid var(--bg);
+    box-shadow: 0 0 0 4px rgba(126,184,247,.12);
+  }
+
+  .timeline-meta {
+    display: flex; align-items: baseline; gap: 1rem;
+    margin-bottom: .6rem; flex-wrap: wrap;
+  }
+
+  .timeline-period {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .68rem;
+    color: var(--sub);
+    letter-spacing: .08em;
+  }
+
+  .timeline-org {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .72rem;
+    color: var(--accent);
+    letter-spacing: .06em;
+  }
+
+  .timeline-role {
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: .5rem;
+  }
+
+  .timeline-desc {
+    font-size: .9rem;
+    color: var(--sub);
+    max-width: 600px;
+    line-height: 1.7;
+  }
+
+  /* ── CONTACT ── */
+  #contact { border-top: 1px solid var(--border); }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .contact-intro {
+    font-size: 1rem;
+    color: var(--text);
+    line-height: 1.8;
+  }
+
+  .contact-links {
+    display: flex; flex-direction: column; gap: .8rem;
+  }
+
+  .contact-link {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1.1rem 1.4rem;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    text-decoration: none;
+    transition: border-color .2s, background .2s;
+  }
+
+  .contact-link:hover {
+    border-color: var(--accent2);
+    background: var(--bg3);
+  }
+
+  .contact-link-icon {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .72rem;
+    color: var(--accent);
+    width: 80px;
+    letter-spacing: .08em;
+    flex-shrink: 0;
+  }
+
+  .contact-link-text {
+    font-size: .88rem;
+    color: var(--text2);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative; z-index: 1;
+    border-top: 1px solid var(--border);
+    padding: 2rem clamp(1.5rem, 10vw, 12rem);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+
+  footer p {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .68rem;
+    color: var(--muted);
+    letter-spacing: .08em;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .6s, transform .6s;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ── CURSOR LINE ── */
+  .cursor-line {
+    display: inline-block;
+    width: 2px; height: 1.1em;
+    background: var(--accent);
+    margin-left: 2px;
+    vertical-align: middle;
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .about-stats { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+    .pub-item { grid-template-columns: 1fr; gap: .5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#hero">JBF<span class="cursor-line"></span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#publications">Papers</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section id="hero">
+    <p class="hero-eyebrow">// Embedded Security · Fuzzing · Side-Channel Analysis</p>
+    <h1 class="hero-name">Jorge<br><span>Barredo</span> Ferreira</h1>
+    <p class="hero-title">PhD Candidate · Embedded/Firmware Security Engineer</p>
+    <p class="hero-desc">
+      Researcher at IKERLAN Technology Research Centre and Mondragon Unibertsitatea.
+      I design novel fuzzing pipelines for embedded and IoT systems, integrating
+      electromagnetic and power side-channel analysis with LLM-assisted seed generation.
+    </p>
+    <div class="hero-tags">
+      <span class="tag">AFL++</span>
+      <span class="tag">Firmware Fuzzing</span>
+      <span class="tag">EM / Power SCA</span>
+      <span class="tag">QEMU</span>
+      <span class="tag">ARM / STM32</span>
+      <span class="tag">IoT Security</span>
+      <span class="tag">LLM-assisted Testing</span>
+      <span class="tag">5G Security</span>
+    </div>
+    <div class="hero-cta">
+      <a href="#publications" class="btn btn-primary">View Publications</a>
+      <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <p class="section-label reveal">01 · About</p>
+    <h2 class="section-title reveal">Background &amp;<br>Expertise</h2>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>
+          I am a <strong>PhD candidate in Industrial Cybersecurity</strong> at Mondragon Unibertsitatea,
+          supervised by Dr. Maialen Eceiza Olaizola and Dr. Mikel Iturbe Urretxa,
+          with a research stay at <strong>University College London (UCL)</strong>.
+        </p>
+        <p>
+          My doctoral work focuses on augmenting coverage-guided fuzzing with hardware-level
+          observability — combining <strong>electromagnetic, power, and timing side-channel signals</strong>
+          as runtime feedback to drive deeper exploration of embedded firmware targets.
+        </p>
+        <p>
+          Beyond academia, I bring industry experience from <strong>DNV</strong> (protocol testing),
+          <strong>Ericsson</strong> (5G core security), and <strong>Barcelona Supercomputing Center</strong>
+          (FPGA / HW-SW co-design). I hold two MSc degrees from <strong>Universidad Carlos III de Madrid</strong>
+          in Cybersecurity and Telecommunication Engineering.
+        </p>
+      </div>
+      <div class="about-stats reveal">
+        <div class="stat-card">
+          <div class="stat-number">4</div>
+          <div class="stat-label">Research Frameworks</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">2×</div>
+          <div class="stat-label">MSc Degrees</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">3+</div>
+          <div class="stat-label">Industry Roles</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">🏆</div>
+          <div class="stat-label">Young CRITIS Award 2nd Place</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section id="research">
+    <p class="section-label reveal">02 · Research</p>
+    <h2 class="section-title reveal">Frameworks &amp;<br>Projects</h2>
+    <div class="research-grid">
+      <div class="research-card reveal">
+        <span class="research-badge">Framework I</span>
+        <h3>CARNYX</h3>
+        <p>Power side-channel analysis integration for embedded fuzzing. Establishes the foundation for hardware-observable coverage-guided testing on constrained targets.</p>
+      </div>
+      <div class="research-card reveal">
+        <span class="research-badge">Framework II</span>
+        <h3>GJALLARHORN</h3>
+        <p>Electromagnetic measurement infrastructure for IoT targets. Enables non-intrusive EM signal acquisition during firmware execution to capture hardware-level behaviour.</p>
+      </div>
+      <div class="research-card reveal">
+        <span class="research-badge">Framework III</span>
+        <h3>GAFLERNA</h3>
+        <p>EM-guided fuzzing integration closing the loop between electromagnetic side-channel feedback and AFL++ mutation strategies. Extended journal version submitted to TOSEM / FSE 2025.</p>
+      </div>
+      <div class="research-card reveal">
+        <span class="research-badge">Framework IV</span>
+        <h3>TRENTI</h3>
+        <p>Multimodal in-loop feedback for embedded fuzzing, combining EM, power, and timing channels simultaneously. Submitted to IEEE EuroS&amp;P. Includes cross-modal triangulation for hardware vulnerability diagnosis.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section id="publications">
+    <p class="section-label reveal">03 · Publications</p>
+    <h2 class="section-title reveal">Selected<br>Papers</h2>
+    <div class="pub-list">
+
+      <div class="pub-item reveal">
+        <div class="pub-year">2025</div>
+        <div class="pub-content">
+          <div class="pub-venue">IEEE EuroS&P — Under Review</div>
+          <div class="pub-title">TRENTI: Multimodal In-Loop Side-Channel Feedback for Embedded Fuzzing</div>
+          <div class="pub-authors">Jorge Barredo Ferreira, Maialen Eceiza Olaizola, Mikel Iturbe Urretxa</div>
+        </div>
+      </div>
+
+      <div class="pub-item reveal">
+        <div class="pub-year">2025</div>
+        <div class="pub-content">
+          <div class="pub-venue">ACM TOSEM / FSE 2025 — Under Review</div>
+          <div class="pub-title">GAFLERNA: Electromagnetic Side-Channel Guided Fuzzing for Embedded Systems</div>
+          <div class="pub-authors">Jorge Barredo Ferreira, Maialen Eceiza Olaizola, Mikel Iturbe Urretxa</div>
+        </div>
+      </div>
+
+      <div class="pub-item reveal">
+        <div class="pub-year">2024</div>
+        <div class="pub-content">
+          <div class="pub-venue">CRITIS 2024 — Young Researcher Award</div>
+          <div class="pub-title">
+            Sow Smarter, Not Harder: Evaluating LLM-generated Seeds for Fuzzing Critical Infrastructure
+            <span class="pub-award">🥈 2nd Place · Young CRITIS Award</span>
+          </div>
+          <div class="pub-authors">Jorge Barredo Ferreira et al.</div>
+        </div>
+      </div>
+
+      <div class="pub-item reveal">
+        <div class="pub-year">2024</div>
+        <div class="pub-content">
+          <div class="pub-venue">IET Information Security — In Preparation</div>
+          <div class="pub-title">Cross-Modal Triangulation of EM Anomalies and Software Evidence for Hardware Vulnerability Diagnosis</div>
+          <div class="pub-authors">Jorge Barredo Ferreira, Maialen Eceiza Olaizola, Mikel Iturbe Urretxa</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <p class="section-label reveal">04 · Experience</p>
+    <h2 class="section-title reveal">Industry &amp;<br>Academic Roles</h2>
+    <div class="timeline">
+
+      <div class="timeline-item reveal">
+        <div class="timeline-meta">
+          <span class="timeline-period">2021 — Present</span>
+          <span class="timeline-org">IKERLAN · Mondragon Unibertsitatea</span>
+        </div>
+        <div class="timeline-role">Embedded/Firmware Security Engineer · PhD Researcher</div>
+        <p class="timeline-desc">Designing and implementing novel fuzzing pipelines for embedded and IoT targets. Research integrates electromagnetic and power side-channel analysis as in-loop feedback for AFL++. Frameworks: CARNYX, GJALLARHORN, GAFLERNA, TRENTI.</p>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-meta">
+          <span class="timeline-period">Research Stay</span>
+          <span class="timeline-org">University College London (UCL)</span>
+        </div>
+        <div class="timeline-role">Visiting Researcher</div>
+        <p class="timeline-desc">International research stay advancing embedded security and side-channel analysis methodologies in collaboration with UCL faculty.</p>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-meta">
+          <span class="timeline-period">Prior</span>
+          <span class="timeline-org">Ericsson</span>
+        </div>
+        <div class="timeline-role">5G Core Security Engineer</div>
+        <p class="timeline-desc">Security testing and analysis of 5G core network components. Protocol-level vulnerability assessment and hardening.</p>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-meta">
+          <span class="timeline-period">Prior</span>
+          <span class="timeline-org">DNV</span>
+        </div>
+        <div class="timeline-role">Protocol Security Tester</div>
+        <p class="timeline-desc">Industrial protocol testing and security evaluation for maritime and energy sector critical systems.</p>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-meta">
+          <span class="timeline-period">Prior</span>
+          <span class="timeline-org">Barcelona Supercomputing Center</span>
+        </div>
+        <div class="timeline-role">FPGA / HW-SW Co-Design Engineer</div>
+        <p class="timeline-desc">Hardware-software co-design on FPGA platforms for high-performance computing applications.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="section-label reveal">05 · Contact</p>
+    <h2 class="section-title reveal">Let's<br>Connect</h2>
+    <div class="contact-grid">
+      <div class="contact-intro reveal">
+        <p>
+          Open to opportunities at the intersection of <strong style="color:var(--text2)">embedded security,
+          firmware vulnerability research, and systems engineering</strong>. Currently exploring
+          roles in industry R&amp;D and advanced security research.
+        </p>
+        <br>
+        <p>
+          PhD defence imminent — available to discuss full-time positions,
+          research collaborations, or consulting engagements.
+        </p>
+      </div>
+      <div class="contact-links reveal">
+        <a href="https://www.linkedin.com/in/jorge-barredo-ferreira" target="_blank" class="contact-link">
+          <span class="contact-link-icon">LinkedIn</span>
+          <span class="contact-link-text">jorge-barredo-ferreira</span>
+        </a>
+        <a href="https://scholar.google.com" target="_blank" class="contact-link">
+          <span class="contact-link-icon">Scholar</span>
+          <span class="contact-link-text">Google Scholar Profile</span>
+        </a>
+        <a href="https://github.com" target="_blank" class="contact-link">
+          <span class="contact-link-icon">GitHub</span>
+          <span class="contact-link-text">Research code &amp; tools</span>
+        </a>
+        <a href="mailto:jorge.barredo@ikerlan.es" class="contact-link">
+          <span class="contact-link-icon">Email</span>
+          <span class="contact-link-text">jorge.barredo@ikerlan.es</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2025 Jorge Barredo Ferreira</p>
+  <p>Embedded Security · Fuzzing · Side-Channel Analysis</p>
+</footer>
+
+<script>
+  // Intersection Observer for reveal animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Smooth nav highlighting
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  const navObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(a => {
+          a.style.color = a.getAttribute('href') === '#' + entry.target.id
+            ? 'var(--accent)' : '';
+        });
+      }
+    });
+  }, { threshold: 0.4 });
+
+  sections.forEach(s => navObs.observe(s));
+</script>
+</body>
+</html>
