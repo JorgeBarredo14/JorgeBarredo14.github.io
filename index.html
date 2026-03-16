@@ -3,339 +3,170 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jorge Barredo Ferreira — Embedded Security Engineer</title>
-<meta name="description" content="Embedded firmware security engineer and PhD. Expert in fuzzing (AFL++, libFuzzer, Firm-AFL/QEMU), vulnerability discovery, side-channel analysis (EM, power, timing), IoT and embedded systems security. Open to firmware security, vulnerability research, and hardware security R&D roles.">
-<meta name="keywords" content="embedded security, firmware fuzzing, AFL++, libFuzzer, Firm-AFL, QEMU, vulnerability research, IoT security, side-channel analysis, electromagnetic analysis, power analysis, ARM, STM32, sanitizers, ASan, UBSan, Ghidra, fuzzing engineer, security researcher, IEC 62443, Jorge Barredo, CARNYX, GJALLARHORN, GAFLERNA, TRENTI">
+<title>Jorge Barredo Ferreira — Embedded Security & Fuzzing Engineer</title>
+<meta name="description" content="Embedded firmware security engineer and PhD specialising in fuzzing (AFL++, libFuzzer, Firm-AFL/QEMU), vulnerability discovery, and side-channel analysis for embedded and IoT systems. Open to firmware security, vulnerability research, and hardware security R&D roles.">
+<meta name="keywords" content="fuzzing engineer, embedded security, firmware security, AFL++, libFuzzer, Firm-AFL, QEMU, vulnerability research, IoT security, side-channel analysis, electromagnetic analysis, power analysis, ARM, STM32, sanitizers, ASan, UBSan, MSan, Ghidra, crash triage, test harness, corpus management, IEC 62443, Jorge Barredo, CARNYX, GJALLARHORN, GAFLERNA, TRENTI, 5G security, DLMS, protocol testing, FPGA">
 <meta name="author" content="Jorge Barredo Ferreira">
-<meta property="og:title" content="Jorge Barredo Ferreira — Embedded Security Engineer">
+<meta property="og:title" content="Jorge Barredo Ferreira — Embedded Security &amp; Fuzzing Engineer">
 <meta property="og:description" content="PhD in Industrial Cybersecurity. Firmware fuzzing, vulnerability discovery, and side-channel analysis for embedded and IoT systems.">
 <meta property="og:type" content="website">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,200;0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
-</head><style>
-:root {
-  --bg: #000;
-  --bg1: #0a0a0a;
-  --bg2: #141414;
-  --bg3: #1c1c1e;
-  --sep: rgba(255,255,255,.06);
-  --sep2: rgba(255,255,255,.1);
-  --blue: #0a84ff;
-  --blue-soft: rgba(10,132,255,.1);
-  --green: #30d158;
-  --amber: #ffd60a;
-  --t0: #fff;
-  --t1: rgba(255,255,255,.88);
-  --t2: rgba(255,255,255,.56);
-  --t3: rgba(255,255,255,.32);
-  --t4: rgba(255,255,255,.16);
-  --r: 16px;
-  --r2: 12px;
-  --max: 1000px;
-  --px: clamp(1.25rem, 5vw, 3rem);
-  --font: -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --mono: ui-monospace, "SF Mono", "Cascadia Code", "Fira Code", Menlo, monospace;
+<style>
+:root{
+  --bg:#000;--bg1:#0a0a0a;--bg2:#141414;--bg3:#1c1c1e;
+  --sep:rgba(255,255,255,.06);--sep2:rgba(255,255,255,.1);
+  --blue:#0a84ff;--blue-s:rgba(10,132,255,.1);
+  --green:#30d158;--amber:#ffd60a;
+  --t0:#fff;--t1:rgba(255,255,255,.88);--t2:rgba(255,255,255,.56);
+  --t3:rgba(255,255,255,.32);--t4:rgba(255,255,255,.16);
+  --r:16px;--r2:12px;--max:1020px;
+  --px:clamp(1.25rem,5vw,3rem);
+  --f:-apple-system,BlinkMacSystemFont,"Inter","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --m:ui-monospace,"SF Mono","Cascadia Code","Fira Code",Menlo,monospace;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{
-  background:var(--bg);color:var(--t1);
-  font-family:var(--font);font-weight:300;
-  line-height:1.65;-webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
-}
-
-/* ── SHARED ── */
+body{background:var(--bg);color:var(--t1);font-family:var(--f);font-weight:300;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
 .wrap{max-width:var(--max);margin:0 auto;padding:clamp(5rem,10vw,7rem) var(--px)}
 hr{border:none;border-top:1px solid var(--sep)}
 
-/* ── NAV ── */
-nav{
-  position:fixed;top:0;inset-inline:0;z-index:200;
-  height:50px;display:flex;align-items:center;justify-content:space-between;
-  padding:0 var(--px);
-  background:rgba(0,0,0,.75);
-  backdrop-filter:saturate(180%) blur(24px);
-  -webkit-backdrop-filter:saturate(180%) blur(24px);
-  border-bottom:1px solid var(--sep);
-}
+/* NAV */
+nav{position:fixed;top:0;inset-inline:0;z-index:200;height:50px;display:flex;align-items:center;justify-content:space-between;padding:0 var(--px);background:rgba(0,0,0,.76);backdrop-filter:saturate(180%) blur(24px);-webkit-backdrop-filter:saturate(180%) blur(24px);border-bottom:1px solid var(--sep)}
 .nav-brand{font-size:.82rem;font-weight:500;color:var(--t1);letter-spacing:-.01em}
 .nav-links{display:flex;gap:1.75rem;list-style:none}
 .nav-links a{font-size:.78rem;color:var(--t2);letter-spacing:.005em;transition:color .15s}
 .nav-links a:hover,.nav-links a.active{color:var(--t0)}
-.nav-dl{
-  font-size:.72rem;font-weight:400;color:var(--blue);
-  border:1px solid rgba(10,132,255,.3);padding:.3rem .9rem;
-  border-radius:980px;transition:all .18s;white-space:nowrap;
-}
+.nav-dl{font-size:.72rem;color:var(--blue);border:1px solid rgba(10,132,255,.3);padding:.3rem .9rem;border-radius:980px;transition:all .18s;white-space:nowrap}
 .nav-dl:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
 .hbg{display:none;flex-direction:column;gap:4.5px;cursor:pointer;background:none;border:none;padding:.3rem}
-.hbg span{width:18px;height:1px;background:var(--t1);display:block;transition:.2s}
-.mmenu{
-  display:none;position:fixed;top:50px;inset-inline:0;z-index:199;
-  background:rgba(0,0,0,.96);backdrop-filter:blur(24px);
-  border-bottom:1px solid var(--sep);
-  padding:1.5rem var(--px);flex-direction:column;gap:1.25rem;
-}
-.mmenu a{font-size:.9rem;color:var(--t1)}
-.mmenu.open{display:flex}
+.hbg span{width:18px;height:1px;background:var(--t1);display:block}
+.mm{display:none;position:fixed;top:50px;inset-inline:0;z-index:199;background:rgba(0,0,0,.96);backdrop-filter:blur(24px);border-bottom:1px solid var(--sep);padding:1.5rem var(--px);flex-direction:column;gap:1.25rem}
+.mm a{font-size:.9rem;color:var(--t1)}
+.mm.open{display:flex}
 
-/* ── HERO ── */
+/* HERO */
 #hero{min-height:100svh;display:flex;align-items:center;padding-top:50px}
-.hero-inner{
-  max-width:var(--max);margin:0 auto;width:100%;
-  padding:clamp(3rem,8vw,5.5rem) var(--px);
-  display:grid;grid-template-columns:1fr 190px;
-  gap:2.5rem 5rem;align-items:center;
-}
-.hero-tag{
-  display:inline-block;
-  font-size:.68rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--blue);margin-bottom:1.4rem;
-  opacity:0;animation:up .5s .05s forwards;
-}
-.hero-name{
-  font-size:clamp(2.6rem,6.5vw,4.4rem);font-weight:600;
-  color:var(--t0);letter-spacing:-.04em;line-height:1.05;
-  margin-bottom:.65rem;
-  opacity:0;animation:up .55s .16s forwards;
-}
-.hero-role{
-  font-size:clamp(.82rem,1.8vw,.94rem);font-weight:300;
-  color:var(--t2);letter-spacing:.005em;margin-bottom:1.6rem;
-  opacity:0;animation:up .55s .27s forwards;
-}
-.hero-bio{
-  font-size:clamp(.9rem,1.75vw,1rem);font-weight:300;color:var(--t2);
-  line-height:1.78;max-width:560px;margin-bottom:1.75rem;
-  opacity:0;animation:up .55s .38s forwards;
-}
+.hero-inner{max-width:var(--max);margin:0 auto;width:100%;padding:clamp(3rem,8vw,5.5rem) var(--px);display:grid;grid-template-columns:1fr 190px;gap:2.5rem 5rem;align-items:center}
+.hero-kw{font-size:.65rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--blue);display:block;margin-bottom:.4rem;opacity:0;animation:up .45s .04s forwards}
+.hero-kw2{font-size:.65rem;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);display:block;margin-bottom:1.3rem;opacity:0;animation:up .45s .1s forwards}
+.hero-name{font-size:clamp(2.6rem,6.5vw,4.4rem);font-weight:600;color:var(--t0);letter-spacing:-.04em;line-height:1.05;margin-bottom:.65rem;opacity:0;animation:up .5s .18s forwards}
+.hero-role{font-size:clamp(.82rem,1.8vw,.94rem);font-weight:300;color:var(--t2);margin-bottom:1.6rem;opacity:0;animation:up .5s .28s forwards}
+.hero-bio{font-size:clamp(.9rem,1.75vw,1rem);color:var(--t2);line-height:1.78;max-width:560px;margin-bottom:1.75rem;opacity:0;animation:up .5s .38s forwards}
 .hero-bio strong{color:var(--t1);font-weight:400}
-
-/* contact pills */
-.hero-contacts{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.75rem;
-  opacity:0;animation:up .5s .48s forwards}
-.cpill{
-  display:inline-flex;align-items:center;gap:.4rem;
-  font-size:.7rem;font-weight:400;color:var(--t2);
-  padding:.38rem .85rem;background:rgba(255,255,255,.04);
-  border:1px solid var(--sep2);border-radius:980px;transition:all .18s;
-}
+.hero-contacts{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.75rem;opacity:0;animation:up .45s .46s forwards}
+.cpill{display:inline-flex;align-items:center;gap:.4rem;font-size:.7rem;color:var(--t2);padding:.38rem .85rem;background:rgba(255,255,255,.04);border:1px solid var(--sep2);border-radius:980px;transition:all .18s}
 .cpill:hover{background:rgba(255,255,255,.09);color:var(--t0);border-color:rgba(255,255,255,.18)}
 .cpill svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0}
+.hero-chips{display:flex;flex-wrap:wrap;gap:.4rem;opacity:0;animation:up .45s .54s forwards}
+.chip{font-size:.64rem;font-weight:400;letter-spacing:.03em;padding:.26rem .7rem;background:var(--blue-s);border:1px solid rgba(10,132,255,.18);color:var(--blue);border-radius:980px}
+.hero-photo-col{display:flex;justify-content:flex-end;align-items:flex-start;opacity:0;animation:up .6s .2s forwards}
+.hero-photo{width:180px;aspect-ratio:4/5;object-fit:cover;object-position:center top;border-radius:20px;border:1px solid var(--sep2);display:block}
 
-/* keyword chips */
-.hero-chips{display:flex;flex-wrap:wrap;gap:.4rem;
-  opacity:0;animation:up .5s .56s forwards}
-.chip{
-  font-size:.64rem;font-weight:400;letter-spacing:.03em;
-  padding:.26rem .7rem;
-  background:var(--blue-soft);
-  border:1px solid rgba(10,132,255,.18);
-  color:var(--blue);border-radius:980px;
-}
+/* SECTIONS */
+.s-ey{font-size:.65rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);display:block;margin-bottom:.7rem}
+.s-ti{font-size:clamp(1.7rem,3.8vw,2.4rem);font-weight:600;color:var(--t0);letter-spacing:-.03em;line-height:1.1;margin-bottom:2.5rem}
 
-/* hero photo */
-.hero-photo-col{display:flex;justify-content:flex-end;align-items:flex-start;
-  opacity:0;animation:up .65s .22s forwards}
-.hero-photo{
-  width:180px;aspect-ratio:4/5;object-fit:cover;object-position:center top;
-  border-radius:20px;border:1px solid var(--sep2);display:block;
-}
-
-/* ── SECTION ── */
-.s-eyebrow{
-  font-size:.65rem;font-weight:500;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--blue);
-  display:block;margin-bottom:.7rem;
-}
-.s-title{
-  font-size:clamp(1.7rem,3.8vw,2.4rem);font-weight:600;
-  color:var(--t0);letter-spacing:-.03em;line-height:1.1;
-  margin-bottom:2.5rem;
-}
-
-/* ── ABOUT ── */
+/* ABOUT */
 .about-cols{display:grid;grid-template-columns:1fr 1fr;gap:3rem 5rem;align-items:start}
 .prose p{margin-bottom:1rem;font-size:.97rem;color:var(--t2);line-height:1.8}
 .prose strong{color:var(--t1);font-weight:400}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
-.stat{
-  background:var(--bg2);border:1px solid var(--sep);
-  border-radius:var(--r);padding:1.2rem 1.4rem;
-}
+.stat{background:var(--bg2);border:1px solid var(--sep);border-radius:var(--r);padding:1.2rem 1.4rem}
 .stat-n{font-size:2rem;font-weight:600;color:var(--t0);line-height:1;margin-bottom:.2rem;letter-spacing:-.03em}
 .stat-l{font-size:.7rem;color:var(--t3);letter-spacing:.03em}
 
-/* ── FRAMEWORKS ── */
+/* FRAMEWORKS */
 #research{background:var(--bg1)}
-.fw-item{
-  border:1px solid var(--sep);border-radius:var(--r);
-  overflow:hidden;margin-bottom:1.25rem;
-  background:var(--bg2);
-}
-.fw-header{
-  display:grid;grid-template-columns:1fr auto;
-  gap:1rem;align-items:start;
-  padding:2rem 2.25rem 1.5rem;
-  border-bottom:1px solid var(--sep);
-}
-.fw-badge{
-  font-size:.6rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--blue);background:var(--blue-soft);
-  border:1px solid rgba(10,132,255,.18);
-  padding:.2rem .6rem;border-radius:980px;
-  display:inline-block;margin-bottom:.85rem;
-}
+.fw-item{border:1px solid var(--sep);border-radius:var(--r);overflow:hidden;margin-bottom:1.25rem;background:var(--bg2)}
+.fw-header{padding:2rem 2rem 1.5rem;border-bottom:1px solid var(--sep)}
+.fw-badge{font-size:.6rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);background:var(--blue-s);border:1px solid rgba(10,132,255,.18);padding:.2rem .6rem;border-radius:980px;display:inline-block;margin-bottom:.85rem}
 .fw-name{font-size:1.6rem;font-weight:600;color:var(--t0);letter-spacing:-.03em;margin-bottom:.5rem}
-.fw-tagline{font-size:.92rem;color:var(--t2);line-height:1.7;max-width:520px}
-.fw-links{display:flex;gap:.5rem;flex-wrap:wrap;padding:.85rem 2.25rem 1.25rem;border-bottom:1px solid var(--sep)}
-.fw-link{
-  font-size:.68rem;color:var(--blue);
-  border:1px solid rgba(10,132,255,.28);padding:.24rem .7rem;
-  border-radius:980px;transition:all .18s;
-}
+.fw-tagline{font-size:.92rem;color:var(--t2);line-height:1.7;max-width:600px}
+.fw-img{padding:0 2rem;border-bottom:1px solid var(--sep)}
+.fw-links{display:flex;gap:.5rem;flex-wrap:wrap;padding:.85rem 2rem 1.25rem;border-bottom:1px solid var(--sep)}
+.fw-link{font-size:.68rem;color:var(--blue);border:1px solid rgba(10,132,255,.28);padding:.24rem .7rem;border-radius:980px;transition:all .18s}
 .fw-link:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
-.fw-body{padding:1.75rem 2.25rem}
+.fw-body{padding:1.75rem 2rem}
 .fw-body p{font-size:.9rem;color:var(--t2);line-height:1.8;margin-bottom:1rem}
 .fw-body p:last-child{margin-bottom:0}
 .fw-body strong{color:var(--t1);font-weight:400}
-
-/* result boxes */
-.fw-results{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:.75rem;margin:1.5rem 0;
-}
-.res-box{
-  background:var(--bg3);border:1px solid var(--sep2);
-  border-radius:var(--r2);padding:1.2rem 1.4rem;
-  text-align:center;
-}
-.res-big{
-  font-size:2rem;font-weight:600;color:var(--t0);
-  letter-spacing:-.04em;line-height:1;margin-bottom:.3rem;
-}
-.res-big.green{color:var(--green)}
-.res-big.blue{color:var(--blue)}
-.res-big.amber{color:var(--amber)}
+.fw-results{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.75rem;margin:1.5rem 0}
+.res{background:var(--bg3);border:1px solid var(--sep2);border-radius:var(--r2);padding:1.2rem 1.4rem;text-align:center}
+.res-big{font-size:2.2rem;font-weight:600;color:var(--t0);letter-spacing:-.04em;line-height:1;margin-bottom:.3rem}
+.res-big.g{color:var(--green)}.res-big.b{color:var(--blue)}.res-big.a{color:var(--amber)}
+.res-lbl{font-size:.6rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin-bottom:.7rem;display:block}
 .res-sub{font-size:.72rem;color:var(--t2);line-height:1.4}
-.res-label{
-  font-size:.62rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--t3);margin-bottom:.85rem;display:block;
-}
 
-/* ── PUBLICATIONS ── */
+/* PUBLICATIONS */
 .pub-list{border-radius:var(--r);overflow:hidden;border:1px solid var(--sep)}
-.pub{
-  background:var(--bg2);padding:1.5rem 1.75rem;
-  display:grid;grid-template-columns:44px 1fr;gap:1.25rem;
-  align-items:start;transition:background .18s;
-}
+.pub{background:var(--bg2);padding:1.5rem 1.75rem;display:grid;grid-template-columns:44px 1fr;gap:1.25rem;align-items:start;transition:background .18s}
 .pub+.pub{border-top:1px solid var(--sep)}
 .pub:hover{background:var(--bg3)}
-.pub-yr{font-family:var(--mono);font-size:.62rem;color:var(--blue);padding-top:.2rem;letter-spacing:.03em}
-.pub-venue{font-size:.62rem;font-family:var(--mono);color:var(--green);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.3rem}
+.pub-yr{font-family:var(--m);font-size:.62rem;color:var(--blue);padding-top:.2rem;letter-spacing:.03em}
+.pub-venue{font-size:.62rem;font-family:var(--m);color:var(--green);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.3rem}
 .pub-title{font-size:.94rem;color:var(--t1);line-height:1.5;margin-bottom:.3rem}
 .pub-authors{font-size:.77rem;color:var(--t2);font-style:italic;margin-bottom:.45rem}
-.pub-award{
-  font-size:.6rem;font-family:var(--mono);color:var(--amber);
-  background:rgba(255,214,10,.07);border:1px solid rgba(255,214,10,.18);
-  padding:.16rem .55rem;border-radius:980px;display:inline-block;margin-bottom:.45rem;
-}
+.pub-award{font-size:.6rem;font-family:var(--m);color:var(--amber);background:rgba(255,214,10,.07);border:1px solid rgba(255,214,10,.18);padding:.16rem .55rem;border-radius:980px;display:inline-block;margin-bottom:.45rem}
 .pub-actions{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.45rem}
-.pub-btn{
-  font-size:.6rem;font-family:var(--mono);color:var(--t2);
-  border:1px solid var(--sep2);padding:.18rem .55rem;
-  border-radius:980px;transition:all .18s;cursor:pointer;background:none;
-}
+.pub-btn{font-size:.6rem;font-family:var(--m);color:var(--t2);border:1px solid var(--sep2);padding:.18rem .55rem;border-radius:980px;transition:all .18s;cursor:pointer;background:none}
 .pub-btn:hover{color:var(--blue);border-color:var(--blue)}
 .pub-btn.doi{color:var(--blue);border-color:rgba(10,132,255,.3)}
-.bib{
-  display:none;margin-top:.65rem;background:var(--bg);
-  border:1px solid var(--sep);border-radius:10px;
-  padding:.85rem 1rem;font-family:var(--mono);font-size:.65rem;
-  color:var(--t2);line-height:1.65;white-space:pre-wrap;word-break:break-all;
-}
+.bib{display:none;margin-top:.65rem;background:var(--bg);border:1px solid var(--sep);border-radius:10px;padding:.85rem 1rem;font-family:var(--m);font-size:.65rem;color:var(--t2);line-height:1.65;white-space:pre;word-break:normal;overflow-x:auto}
 .bib.open{display:block}
 
-/* ── EXPERIENCE ── */
+/* EXPERIENCE */
 #experience{background:var(--bg1)}
 .exp-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem 5rem;align-items:start}
-.exp-col-head{
-  font-size:.63rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--t3);padding-bottom:.65rem;border-bottom:1px solid var(--sep);margin-bottom:1.75rem;
-}
+.exp-col-head{font-size:.63rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--t3);padding-bottom:.65rem;border-bottom:1px solid var(--sep);margin-bottom:1.75rem}
 .tl{position:relative;padding-left:1.25rem}
-.tl::before{
-  content:'';position:absolute;left:0;top:.32rem;bottom:0;
-  width:1px;background:linear-gradient(var(--sep2) 80%,transparent);
-}
+.tl::before{content:'';position:absolute;left:0;top:.32rem;bottom:0;width:1px;background:linear-gradient(var(--sep2) 80%,transparent)}
 .ti{position:relative;padding-bottom:2rem}
-.ti::before{
-  content:'';position:absolute;left:-1.25rem;top:.3rem;
-  width:5px;height:5px;border-radius:50%;
-  background:var(--blue);box-shadow:0 0 0 3px rgba(10,132,255,.15);
-}
-.ti-period{font-size:.62rem;font-family:var(--mono);color:var(--t3);margin-bottom:.18rem}
+.ti::before{content:'';position:absolute;left:-1.25rem;top:.3rem;width:5px;height:5px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 3px rgba(10,132,255,.15)}
+.ti-period{font-size:.62rem;font-family:var(--m);color:var(--t3);margin-bottom:.18rem}
 .ti-org{font-size:.72rem;font-weight:500;color:var(--blue);margin-bottom:.2rem}
 .ti-role{font-size:.9rem;color:var(--t1);font-weight:400;margin-bottom:.4rem}
 .ti-desc{font-size:.82rem;color:var(--t2);line-height:1.65;max-width:380px}
 .ti-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.5rem}
-.ti-tag{
-  font-size:.58rem;font-family:var(--mono);color:var(--t3);
-  border:1px solid var(--sep);padding:.1rem .45rem;border-radius:980px;
-}
+.ti-tag{font-size:.58rem;font-family:var(--m);color:var(--t3);border:1px solid var(--sep);padding:.1rem .45rem;border-radius:980px}
 
-/* ── CONTACT ── */
+/* CONTACT */
 .contact-cols{display:grid;grid-template-columns:1fr 1fr;gap:3rem 5rem;align-items:start}
 .contact-bio{font-size:.96rem;color:var(--t2);line-height:1.8}
 .contact-bio strong{color:var(--t1);font-weight:400}
 .clinks{display:flex;flex-direction:column;gap:.55rem}
-.clink{
-  display:flex;align-items:center;gap:.9rem;
-  padding:.9rem 1.2rem;background:var(--bg2);
-  border:1px solid var(--sep);border-radius:var(--r2);
-  transition:all .18s;
-}
+.clink{display:flex;align-items:center;gap:.9rem;padding:.9rem 1.2rem;background:var(--bg2);border:1px solid var(--sep);border-radius:var(--r2);transition:all .18s}
 .clink:hover{border-color:var(--sep2);background:var(--bg3)}
 .clink svg{width:15px;height:15px;stroke:var(--blue);fill:none;stroke-width:1.8;flex-shrink:0}
-.clink-lbl{font-size:.63rem;font-family:var(--mono);color:var(--blue);width:60px;flex-shrink:0;letter-spacing:.04em}
+.clink-lbl{font-size:.63rem;font-family:var(--m);color:var(--blue);width:60px;flex-shrink:0;letter-spacing:.04em}
 .clink-val{font-size:.82rem;color:var(--t1)}
 
-/* ── FOOTER ── */
-footer{
-  border-top:1px solid var(--sep);
-  padding:1.4rem var(--px);
-  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;
-}
+footer{border-top:1px solid var(--sep);padding:1.4rem var(--px);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
 footer p{font-size:.68rem;color:var(--t4);letter-spacing:.03em}
 
-/* ── ANIMATIONS ── */
 @keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 .reveal{opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s}
 .reveal.visible{opacity:1;transform:none}
 
-/* ── RESPONSIVE ── */
 @media(max-width:840px){
   .hero-inner{grid-template-columns:1fr;gap:2rem}
   .hero-photo-col{order:-1;justify-content:flex-start}
-  .hero-photo{width:90px;aspect-ratio:4/5;border-radius:12px}
+  .hero-photo{width:90px;border-radius:12px}
   .about-cols,.exp-grid,.contact-cols{grid-template-columns:1fr;gap:2rem}
   .nav-links,.nav-dl{display:none}
   .hbg{display:flex}
   .ti-desc{max-width:100%}
-  .fw-header{grid-template-columns:1fr}
   .fw-results{grid-template-columns:repeat(2,1fr)}
+  .fw-img,.fw-header,.fw-links,.fw-body{padding-left:1.25rem;padding-right:1.25rem}
 }
 @media(max-width:480px){
   .pub{grid-template-columns:1fr;gap:.5rem}
   .pub-yr{display:none}
   .fw-results{grid-template-columns:repeat(2,1fr)}
   .hero-contacts{gap:.35rem}
-  .chip{font-size:.6rem}
 }
-</style><body>
+</style>
+</head>
+<body>
 
 <nav>
   <span class="nav-brand">Jorge Barredo Ferreira</span>
@@ -351,7 +182,7 @@ footer p{font-size:.68rem;color:var(--t4);letter-spacing:.03em}
     <span></span><span></span><span></span>
   </button>
 </nav>
-<div class="mmenu" id="mm">
+<div class="mm" id="mm">
   <a href="#about"        onclick="document.getElementById('mm').classList.remove('open')">About</a>
   <a href="#research"     onclick="document.getElementById('mm').classList.remove('open')">Research</a>
   <a href="#publications" onclick="document.getElementById('mm').classList.remove('open')">Papers</a>
@@ -362,24 +193,22 @@ footer p{font-size:.68rem;color:var(--t4);letter-spacing:.03em}
 
 <main>
 
-<!-- ───────────── HERO ───────────── -->
+<!-- HERO -->
 <section id="hero">
 <div class="hero-inner">
   <div>
-    <span class="hero-tag">Embedded · Firmware · Security</span>
+    <span class="hero-kw">Firmware Fuzzing Engineer</span>
+    <span class="hero-kw2">Embedded Security · Side-Channel Analysis · Vulnerability Research</span>
     <h1 class="hero-name">Jorge Barredo<br>Ferreira</h1>
     <p class="hero-role">Embedded/Firmware Software Security Engineer &nbsp;·&nbsp; PhD in Industrial Cybersecurity</p>
     <p class="hero-bio">
-      I am an embedded security engineer with a <strong>PhD in Industrial Cybersecurity</strong>
-      (Mondragon Unibertsitatea, cum laude) and industry experience across embedded systems,
-      5G core networks, industrial protocol testing, and high-performance computing.
-      My work focuses on <strong>vulnerability discovery for firmware and IoT targets</strong>:
-      building fuzzing pipelines, developing test harnesses, and integrating hardware-level
-      side-channel signals — electromagnetic, power, and timing — when software-only coverage is not enough.
-      I have designed four research frameworks (CARNYX, GJALLARHORN, GAFLERNA, TRENTI)
-      and published in ACM FSE, Computers &amp; Security, and Springer journals.
-      I did a research stay at <strong>University College London</strong> (SOLAR Group),
-      where I collaborated with Prof. Justyna Petke and Prof. David Clark.
+      I am an embedded security engineer with a <strong>PhD in Industrial Cybersecurity</strong> (Mondragon Unibertsitatea, cum laude).
+      My core work is <strong>firmware and IoT fuzzing</strong>: building repeatable pipelines with AFL++, libFuzzer, and Firm-AFL/QEMU,
+      writing test harnesses, managing corpora, and triaging crashes with sanitizers and gdb into reproducible, minimised test cases.
+      When software-only signals stall, I bring in <strong>electromagnetic, power, and timing side-channel analysis</strong>
+      as hardware-level feedback — a technique I developed into four research frameworks across my PhD.
+      I have also worked in 5G core security, industrial protocol testing, and FPGA-based HPC at Ericsson, DNV, and Barcelona Supercomputing Center.
+      Research stay at <strong>University College London</strong> (SOLAR Group) with Prof. Justyna Petke and Prof. David Clark.
     </p>
 
     <div class="hero-contacts">
@@ -414,23 +243,25 @@ footer p{font-size:.68rem;color:var(--t4);letter-spacing:.03em}
       <span class="chip">AFL++</span>
       <span class="chip">libFuzzer</span>
       <span class="chip">Firm-AFL / QEMU</span>
-      <span class="chip">Vulnerability Research</span>
-      <span class="chip">IoT Security</span>
-      <span class="chip">Embedded Systems</span>
-      <span class="chip">Side-Channel Analysis</span>
-      <span class="chip">EM / Power / Timing</span>
-      <span class="chip">C · C++ · Python</span>
+      <span class="chip">Test Harness</span>
+      <span class="chip">Crash Triage</span>
+      <span class="chip">Corpus Management</span>
       <span class="chip">ASan · UBSan · MSan</span>
+      <span class="chip">Side-Channel Analysis</span>
+      <span class="chip">EM · Power · Timing</span>
+      <span class="chip">IoT Security</span>
+      <span class="chip">Vulnerability Research</span>
+      <span class="chip">Embedded Systems</span>
       <span class="chip">ARM · STM32</span>
+      <span class="chip">C · C++ · Python</span>
       <span class="chip">Ghidra</span>
       <span class="chip">Docker · CI/CD</span>
       <span class="chip">IEC 62443</span>
       <span class="chip">5G Core Security</span>
       <span class="chip">Protocol Testing</span>
-      <span class="chip">FPGA · HW/SW Co-design</span>
+      <span class="chip">FPGA · HPC</span>
     </div>
   </div>
-
   <div class="hero-photo-col">
     <img src="data:image/jpeg;base64,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" class="hero-photo" alt="Jorge Barredo Ferreira" width="180" height="225">
   </div>
@@ -439,24 +270,24 @@ footer p{font-size:.68rem;color:var(--t4);letter-spacing:.03em}
 
 <hr>
 
-<!-- ───────────── ABOUT ───────────── -->
+<!-- ABOUT -->
 <section id="about">
 <div class="wrap">
-  <span class="s-eyebrow reveal">About</span>
-  <h2 class="s-title reveal">Background</h2>
+  <span class="s-ey reveal">About</span>
+  <h2 class="s-ti reveal">Background</h2>
   <div class="about-cols">
     <div class="prose reveal">
-      <p>I am an <strong>Embedded/Firmware Software Security Engineer</strong> with a PhD in Industrial Cybersecurity (Mondragon Unibertsitatea, cum laude). I work at the intersection of software testing and hardware observability, building systems that find vulnerabilities in firmware before they reach production.</p>
-      <p>My PhD research gave rise to four frameworks — CARNYX, GJALLARHORN, GAFLERNA, and TRENTI — that progressively integrate power, electromagnetic, and timing side-channel signals as feedback into fuzzing campaigns, enabling vulnerability detection on embedded targets without source code access.</p>
-      <p>Before my PhD I worked at <strong>Ericsson</strong> on 5G core security mechanisms and cloud-native service mesh hardening, at <strong>DNV</strong> on protocol conformance testing for energy and telecom devices, and at <strong>Barcelona Supercomputing Center</strong> on FPGA acceleration for graph workloads.</p>
-      <p>I hold two MSc degrees from <strong>Universidad Carlos III de Madrid</strong> — in Cybersecurity and in Telecommunication Engineering — and a BSc from Universidad de Cantabria, where I graduated with Honours (10/10) on my bachelor thesis on FPGA-based PageRank acceleration. I carried out a research stay at <strong>University College London</strong> as visiting PhD researcher in the SOLAR Group, collaborating with Prof. Justyna Petke and Prof. David Clark on extending EM side-channel analysis into fuzzing workflows.</p>
+      <p>I am an <strong>Embedded/Firmware Software Security Engineer</strong> with a PhD in Industrial Cybersecurity (Mondragon Unibertsitatea, cum laude). I work at the intersection of software testing and hardware observability — building systems that find vulnerabilities in firmware before they reach production.</p>
+      <p>My PhD produced four frameworks — CARNYX, GJALLARHORN, GAFLERNA, and TRENTI — that progressively integrate power, electromagnetic, and timing side-channel signals into fuzzing campaigns, enabling vulnerability detection on embedded targets without source code access or binary modification.</p>
+      <p>Before my PhD I worked at <strong>Ericsson</strong> on 5G core security and cloud-native service mesh hardening, at <strong>DNV</strong> on protocol conformance testing for energy and telecom devices, and at <strong>Barcelona Supercomputing Center</strong> on FPGA acceleration for graph workloads.</p>
+      <p>I hold two MSc degrees from <strong>Universidad Carlos III de Madrid</strong> (Cybersecurity and Telecommunication Engineering) and a BSc in Telecommunication Technologies from Universidad de Cantabria (Honours thesis, 10/10). I carried out a research stay at <strong>UCL</strong> as visiting PhD researcher in the SOLAR Group.</p>
     </div>
     <div class="reveal">
       <div class="stats">
         <div class="stat"><div class="stat-n">5</div><div class="stat-l">Publications</div></div>
-        <div class="stat"><div class="stat-n">4</div><div class="stat-l">Research Frameworks</div></div>
+        <div class="stat"><div class="stat-n">4</div><div class="stat-l">Frameworks</div></div>
         <div class="stat"><div class="stat-n">2×</div><div class="stat-l">MSc Degrees</div></div>
-        <div class="stat"><div class="stat-n">🏆</div><div class="stat-l">Young CRITIS Award</div></div>
+        <div class="stat"><div class="stat-n">🏆</div><div class="stat-l">Young CRITIS Award 2nd</div></div>
       </div>
     </div>
   </div>
@@ -465,146 +296,312 @@ footer p{font-size:.68rem;color:var(--t4);letter-spacing:.03em}
 
 <hr>
 
-<!-- ───────────── RESEARCH ───────────── -->
+<!-- RESEARCH -->
 <section id="research">
 <div class="wrap">
-  <span class="s-eyebrow reveal">Research</span>
-  <h2 class="s-title reveal">Frameworks &amp; Projects</h2>
+  <span class="s-ey reveal">Research</span>
+  <h2 class="s-ti reveal">Frameworks &amp; Projects</h2>
 
   <!-- TRENTI -->
   <div class="fw-item reveal">
     <div class="fw-header">
-      <div>
-        <span class="fw-badge">Framework IV · In Submission</span>
-        <div class="fw-name">TRENTI</div>
-        <p class="fw-tagline">Multimodal in-loop side-channel feedback for embedded fuzzing under full black-box conditions, combining AFL++ with Firm-AFL/QEMU emulation.</p>
-      </div>
+      <span class="fw-badge">Framework IV · In Submission</span>
+      <div class="fw-name">TRENTI</div>
+      <p class="fw-tagline">Multimodal in-loop side-channel feedback for embedded fuzzing under full black-box conditions — combining AFL++ with Firm-AFL/QEMU and simultaneous EM, power, and timing signals.</p>
     </div>
-    <div class="fw-links">
-      <span style="font-size:.65rem;color:var(--t3);font-style:italic">Repository not yet public</span>
-    </div>
+    <div class="fw-img"><svg viewBox="0 0 420 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+  <rect width="420" height="200" fill="#111" rx="10"/>
+  <text x="16" y="22" font-family="-apple-system,sans-serif" font-size="9" fill="#ffffff44" letter-spacing="2">MULTIMODAL FEEDBACK — TRENTI</text>
+  <!-- Three signal channels -->
+  <!-- EM channel -->
+  <text x="16" y="45" font-family="-apple-system,sans-serif" font-size="7" fill="#0a84ff">EM</text>
+  <polyline points="30,50 45,48 55,43 65,38 75,42 85,50 95,51 105,49 115,46 125,42 135,36 145,50 155,51 165,49" fill="none" stroke="#0a84ff" stroke-width="1.2"/>
+  <!-- Power channel -->
+  <text x="16" y="75" font-family="-apple-system,sans-serif" font-size="7" fill="#30d158">PWR</text>
+  <polyline points="30,80 50,79 70,77 80,68 90,60 100,68 110,77 130,78 150,77 160,68 170,59 180,67 190,76" fill="none" stroke="#30d158" stroke-width="1.2"/>
+  <!-- Timing channel -->
+  <text x="16" y="105" font-family="-apple-system,sans-serif" font-size="7" fill="#ffd60a">TIME</text>
+  <polyline points="30,110 60,110 60,105 90,105 90,110 100,110 100,98 120,98 120,110 150,110 150,104 170,104 170,110 195,110" fill="none" stroke="#ffd60a" stroke-width="1.2"/>
+  <!-- Fusion box -->
+  <rect x="205" y="38" width="60" height="80" rx="8" fill="#0a84ff" fill-opacity=".1" stroke="#0a84ff" stroke-width=".8"/>
+  <text x="235" y="72" font-family="-apple-system,sans-serif" font-size="8" fill="#0a84ff" text-anchor="middle">signal</text>
+  <text x="235" y="84" font-family="-apple-system,sans-serif" font-size="8" fill="#0a84ff" text-anchor="middle">fusion</text>
+  <!-- Lines to fusion -->
+  <line x1="195" y1="50" x2="205" y2="68" stroke="#0a84ff" stroke-width=".7" stroke-dasharray="2,1"/>
+  <line x1="192" y1="79" x2="205" y2="79" stroke="#30d158" stroke-width=".7" stroke-dasharray="2,1"/>
+  <line x1="195" y1="110" x2="205" y2="90" stroke="#ffd60a" stroke-width=".7" stroke-dasharray="2,1"/>
+  <!-- Arrow to AFL++ -->
+  <line x1="265" y1="78" x2="285" y2="78" stroke="#ffffff33" stroke-width="1"/>
+  <polygon points="285,75 292,78 285,81" fill="#ffffff33"/>
+  <!-- AFL++ box -->
+  <rect x="292" y="55" width="70" height="46" rx="8" fill="#1c1c1e" stroke="#ffffff22" stroke-width=".8"/>
+  <text x="327" y="77" font-family="-apple-system,sans-serif" font-size="9" font-weight="500" fill="#ffffff" text-anchor="middle">AFL++</text>
+  <text x="327" y="90" font-family="-apple-system,sans-serif" font-size="7" fill="#ffffff55" text-anchor="middle">Firm-AFL/QEMU</text>
+  <!-- Feedback arrow -->
+  <path d="M 327 101 Q 327 125 235 125 Q 145 125 100 110" fill="none" stroke="#0a84ff" stroke-width=".8" stroke-dasharray="3,2"/>
+  <polygon points="100,110 97,116 103,116" fill="#0a84ff"/>
+  <text x="220" y="135" font-family="-apple-system,sans-serif" font-size="7" fill="#0a84ff55" text-anchor="middle">in-loop hardware feedback</text>
+  <!-- Bottom labels -->
+  <text x="16" y="158" font-family="-apple-system,sans-serif" font-size="8" fill="#ffffff55">Black-box firmware · No source · No instrumentation</text>
+  <text x="16" y="172" font-family="-apple-system,sans-serif" font-size="8" fill="#ffffff33">Embedded Linux (Firm-AFL/QEMU) + bare-metal targets</text>
+  <text x="16" y="186" font-family="-apple-system,sans-serif" font-size="8" fill="#ffffff22">Cross-modal triangulation → automated vulnerability triage</text>
+</svg></div>
+    <div class="fw-links"><span style="font-size:.65rem;color:var(--t3);font-style:italic">Repository not yet public</span></div>
     <div class="fw-body">
-      <p>TRENTI addresses a fundamental limitation of firmware fuzzing: when no source code is available and the target runs on real hardware or in emulation, standard coverage signals become unavailable or unreliable. TRENTI closes this gap by simultaneously capturing <strong>electromagnetic emissions, power consumption traces, and execution timing</strong> during a fuzzing campaign and feeding them back to AFL++ as a composite hardware-level coverage signal.</p>
+      <p>TRENTI addresses a fundamental limitation of firmware fuzzing: when no source code is available and the target runs on real hardware or in emulation, standard software coverage signals become unavailable or unreliable. TRENTI closes this gap by <strong>simultaneously capturing EM emissions, power traces, and execution timing</strong> during a fuzzing campaign, feeding them back to AFL++ as a composite hardware-level coverage oracle.</p>
       <p>The framework integrates with <strong>Firm-AFL/QEMU</strong> for full-system emulation of embedded Linux firmware and falls back to direct hardware measurement for bare-metal targets. A custom feedback bridge translates physical signal deviations — detected via HDBSCAN clustering on time-domain EM traces — into edge discovery events that guide AFL++'s mutation engine toward unexplored execution paths.</p>
-      <p>TRENTI also incorporates the cross-modal triangulation methodology from GJALLARHORN to diagnose whether a detected anomaly corresponds to a memory-safety violation, an arithmetic error, or a timing-sensitive code path, giving engineers prioritised triage without decompilation.</p>
+      <p>TRENTI also incorporates cross-modal triangulation to diagnose whether a detected anomaly corresponds to a memory-safety violation, an arithmetic error, or a timing-sensitive path — giving engineers prioritised triage without decompilation.</p>
     </div>
   </div>
 
   <!-- GAFLERNA -->
   <div class="fw-item reveal">
     <div class="fw-header">
-      <div>
-        <span class="fw-badge">Framework III · ACM FSE 2025</span>
-        <div class="fw-name">GAFLERNA</div>
-        <p class="fw-tagline">First framework to integrate electromagnetic side-channel analysis as live oracle feedback into a standard AFL++ fuzzing campaign for IoT and embedded firmware.</p>
-      </div>
+      <span class="fw-badge">Framework III · ACM FSE 2025</span>
+      <div class="fw-name">GAFLERNA</div>
+      <p class="fw-tagline">First framework to integrate electromagnetic side-channel analysis as a live oracle into a standard AFL++ fuzzing campaign for IoT and embedded firmware, with no target modification.</p>
     </div>
+    <div class="fw-img"><svg viewBox="0 0 420 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+  <rect width="420" height="200" fill="#111" rx="10"/>
+  <text x="16" y="22" font-family="-apple-system,sans-serif" font-size="9" fill="#ffffff44" letter-spacing="2">AFL++ + EM ORACLE PIPELINE</text>
+  <!-- Pipeline flow -->
+  <!-- Box: Firmware -->
+  <rect x="16" y="40" width="64" height="36" rx="6" fill="#1c1c1e" stroke="#0a84ff" stroke-width=".8"/>
+  <text x="48" y="55" font-family="-apple-system,sans-serif" font-size="8" fill="#ffffff88" text-anchor="middle">Firmware</text>
+  <text x="48" y="67" font-family="-apple-system,sans-serif" font-size="7" fill="#0a84ff" text-anchor="middle">STM32</text>
+  <!-- Arrow -->
+  <line x1="80" y1="58" x2="96" y2="58" stroke="#ffffff22" stroke-width="1"/>
+  <polygon points="96,55 102,58 96,61" fill="#ffffff22"/>
+  <!-- Box: EM Probe -->
+  <rect x="102" y="40" width="64" height="36" rx="6" fill="#1c1c1e" stroke="#ffd60a" stroke-width=".8"/>
+  <text x="134" y="55" font-family="-apple-system,sans-serif" font-size="8" fill="#ffffff88" text-anchor="middle">EM Probe</text>
+  <text x="134" y="67" font-family="-apple-system,sans-serif" font-size="7" fill="#ffd60a" text-anchor="middle">SDR</text>
+  <!-- Arrow -->
+  <line x1="166" y1="58" x2="182" y2="58" stroke="#ffffff22" stroke-width="1"/>
+  <polygon points="182,55 188,58 182,61" fill="#ffffff22"/>
+  <!-- Box: HDBSCAN -->
+  <rect x="188" y="40" width="64" height="36" rx="6" fill="#1c1c1e" stroke="#30d158" stroke-width=".8"/>
+  <text x="220" y="55" font-family="-apple-system,sans-serif" font-size="8" fill="#ffffff88" text-anchor="middle">HDBSCAN</text>
+  <text x="220" y="67" font-family="-apple-system,sans-serif" font-size="7" fill="#30d158" text-anchor="middle">classifier</text>
+  <!-- Arrow -->
+  <line x1="252" y1="58" x2="268" y2="58" stroke="#ffffff22" stroke-width="1"/>
+  <polygon points="268,55 274,58 268,61" fill="#ffffff22"/>
+  <!-- Box: AFL++ -->
+  <rect x="274" y="40" width="64" height="36" rx="6" fill="#1c1c1e" stroke="#0a84ff" stroke-width=".8"/>
+  <text x="306" y="55" font-family="-apple-system,sans-serif" font-size="8" fill="#ffffff88" text-anchor="middle">AFL++</text>
+  <text x="306" y="67" font-family="-apple-system,sans-serif" font-size="7" fill="#0a84ff" text-anchor="middle">mutator</text>
+  <!-- Feedback loop arrow -->
+  <path d="M 338 76 Q 338 110 48 110 Q 48 92 48 76" fill="none" stroke="#0a84ff" stroke-width=".8" stroke-dasharray="3,2"/>
+  <polygon points="48,76 45,82 51,82" fill="#0a84ff"/>
+  <text x="165" y="124" font-family="-apple-system,sans-serif" font-size="7" fill="#0a84ff44" text-anchor="middle">hardware feedback loop</text>
+  <!-- Metrics row -->
+  <rect x="16" y="140" width="88" height="44" rx="6" fill="#0a84ff" fill-opacity=".08" stroke="#0a84ff" stroke-width=".6"/>
+  <text x="60" y="157" font-family="-apple-system,sans-serif" font-size="18" font-weight="600" fill="#ffffff" text-anchor="middle">87%</text>
+  <text x="60" y="170" font-family="-apple-system,sans-serif" font-size="7" fill="#ffffff55" text-anchor="middle">sanitizer correlation</text>
+  <text x="60" y="180" font-family="-apple-system,sans-serif" font-size="7" fill="#ffffff33" text-anchor="middle">no binary mod</text>
+  <rect x="114" y="140" width="88" height="44" rx="6" fill="#30d158" fill-opacity=".08" stroke="#30d158" stroke-width=".6"/>
+  <text x="158" y="157" font-family="-apple-system,sans-serif" font-size="18" font-weight="600" fill="#30d158" text-anchor="middle">104</text>
+  <text x="158" y="170" font-family="-apple-system,sans-serif" font-size="7" fill="#ffffff55" text-anchor="middle">new crash paths</text>
+  <text x="158" y="180" font-family="-apple-system,sans-serif" font-size="7" fill="#ffffff33" text-anchor="middle">4 real-world programs</text>
+  <rect x="212" y="140" width="88" height="44" rx="6" fill="#ffd60a" fill-opacity=".06" stroke="#ffd60a" stroke-width=".6"/>
+  <text x="256" y="157" font-family="-apple-system,sans-serif" font-size="18" font-weight="600" fill="#ffd60a" text-anchor="middle">ACM</text>
+  <text x="256" y="170" font-family="-apple-system,sans-serif" font-size="7" fill="#ffffff55" text-anchor="middle">FSE 2025</text>
+  <text x="256" y="180" font-family="-apple-system,sans-serif" font-size="7" fill="#ffffff33" text-anchor="middle">Trondheim, Norway</text>
+  <rect x="310" y="140" width="94" height="44" rx="6" fill="#ffffff" fill-opacity=".04" stroke="#ffffff22" stroke-width=".6"/>
+  <text x="357" y="157" font-family="-apple-system,sans-serif" font-size="10" font-weight="500" fill="#ffffff88" text-anchor="middle">0 mods</text>
+  <text x="357" y="170" font-family="-apple-system,sans-serif" font-size="7" fill="#ffffff55" text-anchor="middle">to target binary</text>
+  <text x="357" y="180" font-family="-apple-system,sans-serif" font-size="7" fill="#ffffff33" text-anchor="middle">source-free · black-box</text>
+</svg></div>
     <div class="fw-links">
       <a href="https://doi.org/10.1145/3696630.3728497" target="_blank" class="fw-link">DOI ↗</a>
       <a href="https://dl.acm.org/doi/pdf/10.1145/3696630.3728497" target="_blank" class="fw-link">PDF ↗</a>
       <span style="font-size:.65rem;color:var(--t3);font-style:italic">Repository not yet public</span>
     </div>
     <div class="fw-body">
-      <p>Standard fuzzing relies on a binary crash/no-crash oracle. Sanitizers extend this but require recompilation or binary rewriting — impossible on many embedded targets shipped without source. GAFLERNA replaces this dependency by treating the device's own <strong>electromagnetic field as a real-time anomaly detector</strong>.</p>
-      <p>During each AFL++ execution, GAFLERNA records a short EM trace from the device under test using a near-field probe and a Software-Defined Radio. A pre-trained HDBSCAN model classifies the trace as nominal or anomalous. If anomalous, GAFLERNA reports a virtual crash to AFL++, preserving the input in the crash corpus. This allows AFL++ to continue exploring the neighbourhood of the triggering input without ever modifying the binary or requiring debug symbols.</p>
-      <p>Evaluated on four real-world open-source programs compiled for an STM32 target, GAFLERNA was validated against ground-truth ASan findings on a host build of the same programs.</p>
+      <p>Standard fuzzing relies on a binary crash/no-crash oracle. Sanitizers extend this but require recompilation — impossible on many embedded targets shipped without source. GAFLERNA replaces this by treating the device's own <strong>electromagnetic field as a real-time anomaly detector</strong>.</p>
+      <p>During each AFL++ execution, GAFLERNA records a short EM trace from the device under test using a near-field probe and an SDR. A pre-trained HDBSCAN model classifies the trace as nominal or anomalous. If anomalous, GAFLERNA reports a virtual crash to AFL++, preserving the input in the crash corpus — without ever touching the binary or requiring debug symbols.</p>
       <div class="fw-results">
-        <div class="res-box">
-          <span class="res-label">Sanitizer Correlation</span>
-          <div class="res-big green">87%</div>
-          <div class="res-sub">Best-case agreement with ASan findings — no binary modification</div>
-        </div>
-        <div class="res-box">
-          <span class="res-label">New Crash Paths</span>
-          <div class="res-big blue">104</div>
-          <div class="res-sub">Previously undiscovered paths to known crashes across 4 programs</div>
-        </div>
-        <div class="res-box">
-          <span class="res-label">Target Modification</span>
-          <div class="res-big amber">None</div>
-          <div class="res-sub">No recompilation, no instrumentation, no debug symbols required</div>
-        </div>
+        <div class="res"><span class="res-lbl">Sanitizer Correlation</span><div class="res-big g">87%</div><div class="res-sub">Best-case agreement with ASan — no binary modification required</div></div>
+        <div class="res"><span class="res-lbl">New Crash Paths</span><div class="res-big b">104</div><div class="res-sub">Previously undiscovered paths across 4 real-world programs</div></div>
+        <div class="res"><span class="res-lbl">Target Modification</span><div class="res-big a">None</div><div class="res-sub">No recompilation, no instrumentation, no debug symbols</div></div>
       </div>
+      <p>Evaluated on four real-world open-source programs compiled for STM32, validated against ground-truth ASan findings on a host build. <strong>Outperforms prior EM-based monitoring approaches</strong> that required pre-labelled datasets — GAFLERNA operates entirely unsupervised in-loop.</p>
     </div>
   </div>
 
   <!-- GJALLARHORN -->
   <div class="fw-item reveal">
     <div class="fw-header">
-      <div>
-        <span class="fw-badge">Framework II · Computers &amp; Security 2025</span>
-        <div class="fw-name">GJALLARHORN</div>
-        <p class="fw-tagline">Automated electromagnetic side-channel measurement framework for early-stage vulnerability detection in embedded systems, validated across 16 vulnerability types on two hardware architectures.</p>
-      </div>
+      <span class="fw-badge">Framework II · Computers &amp; Security 2025</span>
+      <div class="fw-name">GJALLARHORN</div>
+      <p class="fw-tagline">Automated EM side-channel framework for early-stage vulnerability detection — classifying 16 flaw types non-invasively, without source code or debug interfaces, validated on two hardware architectures.</p>
     </div>
+    <div class="fw-img"><svg viewBox="0 0 420 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+  <rect width="420" height="200" fill="#111" rx="10"/>
+  <text x="16" y="22" font-family="-apple-system,sans-serif" font-size="9" fill="#ffffff44" letter-spacing="2">EM SPECTRUM — NUCLEO-144</text>
+  <!-- Frequency domain bars -->
+  <g opacity=".9">
+    <rect x="16" y="100" width="8" height="30" rx="1" fill="#0a84ff" fill-opacity=".3"/>
+    <rect x="28" y="85" width="8" height="45" rx="1" fill="#0a84ff" fill-opacity=".4"/>
+    <rect x="40" y="60" width="8" height="70" rx="1" fill="#0a84ff" fill-opacity=".6"/>
+    <rect x="52" y="40" width="8" height="90" rx="1" fill="#0a84ff" fill-opacity=".8"/>
+    <rect x="64" y="35" width="8" height="95" rx="1" fill="#0a84ff"/>
+    <rect x="76" y="50" width="8" height="80" rx="1" fill="#0a84ff" fill-opacity=".7"/>
+    <rect x="88" y="70" width="8" height="60" rx="1" fill="#0a84ff" fill-opacity=".5"/>
+    <rect x="100" y="88" width="8" height="42" rx="1" fill="#0a84ff" fill-opacity=".35"/>
+    <!-- anomaly spike -->
+    <rect x="112" y="25" width="8" height="105" rx="1" fill="#ffd60a"/>
+    <rect x="124" y="55" width="8" height="75" rx="1" fill="#ffd60a" fill-opacity=".6"/>
+    <rect x="136" y="80" width="8" height="50" rx="1" fill="#ffd60a" fill-opacity=".4"/>
+    <rect x="148" y="92" width="8" height="38" rx="1" fill="#0a84ff" fill-opacity=".3"/>
+    <rect x="160" y="78" width="8" height="52" rx="1" fill="#0a84ff" fill-opacity=".45"/>
+    <rect x="172" y="60" width="8" height="70" rx="1" fill="#0a84ff" fill-opacity=".55"/>
+  </g>
+  <line x1="16" y1="130" x2="190" y2="130" stroke="#ffffff22" stroke-width=".8"/>
+  <text x="108" y="148" font-family="-apple-system,sans-serif" font-size="7" fill="#ffd60a">anomalous</text>
+  <text x="108" y="158" font-family="-apple-system,sans-serif" font-size="7" fill="#ffd60a">signature</text>
+  <!-- Right metrics -->
+  <text x="210" y="55" font-family="-apple-system,sans-serif" font-size="28" font-weight="600" fill="#ffffff" letter-spacing="-2">95.94%</text>
+  <text x="210" y="72" font-family="-apple-system,sans-serif" font-size="8" fill="#ffffff55">recall — STM32 NUCLEO-144</text>
+  <text x="210" y="95" font-family="-apple-system,sans-serif" font-size="28" font-weight="600" fill="#0a84ff" letter-spacing="-2">73.33%</text>
+  <text x="210" y="112" font-family="-apple-system,sans-serif" font-size="8" fill="#ffffff55">recall — Raspberry Pi 3B</text>
+  <line x1="210" y1="126" x2="404" y2="126" stroke="#ffffff11" stroke-width=".8"/>
+  <text x="210" y="142" font-family="-apple-system,sans-serif" font-size="9" fill="#30d158">16 vulnerability classes</text>
+  <text x="210" y="156" font-family="-apple-system,sans-serif" font-size="8" fill="#ffffff33">memory · arithmetic · null-ptr · overflow</text>
+  <text x="210" y="172" font-family="-apple-system,sans-serif" font-size="8" fill="#ffffff33">non-invasive · no debug interface</text>
+</svg></div>
     <div class="fw-links">
       <a href="https://doi.org/10.1016/j.cose.2025.104692" target="_blank" class="fw-link">DOI ↗</a>
       <a href="https://github.com/JorgeBarredo14/GJALLARHORN" target="_blank" class="fw-link">GitHub ↗</a>
     </div>
     <div class="fw-body">
-      <p>GJALLARHORN asks a simple but powerful question: can we detect that a piece of firmware contains a vulnerability simply by observing its electromagnetic emissions — without ever executing the bug-triggering input? The answer is yes, for a broad class of memory and arithmetic flaws.</p>
-      <p>The framework automates the full EM measurement pipeline: probe placement, trace acquisition via oscilloscope, signal conditioning, feature extraction using time-frequency decomposition, and multi-class classification with a trained ML model. It distinguishes up to <strong>16 distinct vulnerability categories</strong>, including buffer overflows, memory leaks, null pointer dereferences, and arithmetic overflows — going far beyond the binary anomalous/safe detection of prior work.</p>
-      <p>The key insight exploited is that different vulnerability types produce characteristic EM signatures rooted in their distinct memory access and execution patterns. Buffer overflows generate irregular DRAM access bursts; divide-by-zero faults produce truncated execution traces; memory leaks manifest as monotonically growing heap traffic signatures.</p>
+      <p>GJALLARHORN asks a simple but powerful question: can we detect that firmware <em>contains</em> a vulnerability simply by observing EM emissions — without ever triggering the bug? The answer is yes, for a broad class of memory and arithmetic flaws.</p>
+      <p>The framework automates the full EM pipeline: trace acquisition via oscilloscope, signal conditioning, time-frequency feature extraction, and multi-class ML classification. It distinguishes <strong>16 distinct vulnerability categories</strong> — buffer overflows, memory leaks, null pointer dereferences, arithmetic overflows — far beyond the binary anomalous/safe detection of prior work.</p>
       <div class="fw-results">
-        <div class="res-box">
-          <span class="res-label">Recall — STM32 NUCLEO-144</span>
-          <div class="res-big green">95.94%</div>
-          <div class="res-sub">F₁ score 96.39% on low-end ARM Cortex-M4 target</div>
-        </div>
-        <div class="res-box">
-          <span class="res-label">Recall — Raspberry Pi 3B</span>
-          <div class="res-big blue">73.33%</div>
-          <div class="res-sub">F₁ score 84.61% on Linux-capable ARM Cortex-A53</div>
-        </div>
-        <div class="res-box">
-          <span class="res-label">Vulnerability Classes</span>
-          <div class="res-big amber">16</div>
-          <div class="res-sub">Memory and arithmetic flaws; categorised, not just detected</div>
-        </div>
+        <div class="res"><span class="res-lbl">Recall — STM32 NUCLEO-144</span><div class="res-big g">95.94%</div><div class="res-sub">F₁ 96.39% — ARM Cortex-M4, low-end target</div></div>
+        <div class="res"><span class="res-lbl">Recall — Raspberry Pi 3B</span><div class="res-big b">73.33%</div><div class="res-sub">F₁ 84.61% — ARM Cortex-A53, Linux SBC</div></div>
+        <div class="res"><span class="res-lbl">Vulnerability Classes</span><div class="res-big a">16</div><div class="res-sub">Categorised, not just detected — memory &amp; arithmetic</div></div>
       </div>
+      <p>Key insight: different vulnerability types produce <strong>characteristic EM signatures</strong> rooted in distinct memory access and execution patterns. Buffer overflows generate irregular DRAM burst signatures; divide-by-zero faults produce truncated execution traces; memory leaks manifest as monotonically growing heap traffic.</p>
     </div>
   </div>
 
   <!-- CARNYX -->
   <div class="fw-item reveal">
     <div class="fw-header">
-      <div>
-        <span class="fw-badge">Framework I · Int. J. Information Security 2025</span>
-        <div class="fw-name">CARNYX</div>
-        <p class="fw-tagline">Power consumption side-channel analysis framework for pre-deployment vulnerability detection on resource-constrained embedded targets, with multi-class classification across 16 flaw types.</p>
-      </div>
+      <span class="fw-badge">Framework I · Int. J. Information Security 2025</span>
+      <div class="fw-name">CARNYX</div>
+      <p class="fw-tagline">Power-based side-channel analysis framework for pre-deployment vulnerability detection — 16 flaw classes, three hardware platforms, up to 99.69% recall, no source code required.</p>
     </div>
+    <div class="fw-img"><svg viewBox="0 0 420 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0a84ff" stop-opacity=".18"/>
+      <stop offset="100%" stop-color="#0a84ff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="420" height="200" fill="#111" rx="10"/>
+  <!-- Power trace waveform -->
+  <text x="16" y="22" font-family="-apple-system,sans-serif" font-size="9" fill="#ffffff44" letter-spacing="2">POWER TRACE — STM32F4</text>
+  <polyline points="16,80 36,78 56,75 66,60 76,45 86,38 96,42 106,55 116,68 126,72 136,70 156,71 176,69 196,72 206,58 216,44 226,37 236,44 246,58 256,70 276,71 296,70 316,69 336,72 356,71 376,70 396,71 406,70" fill="none" stroke="#0a84ff" stroke-width="1.5" stroke-linejoin="round"/>
+  <!-- Anomaly highlight -->
+  <rect x="62" y="30" width="50" height="60" fill="url(#g1)" rx="3"/>
+  <rect x="200" y="30" width="50" height="60" fill="url(#g1)" rx="3"/>
+  <text x="64" y="105" font-family="-apple-system,sans-serif" font-size="8" fill="#0a84ff">overflow</text>
+  <text x="202" y="105" font-family="-apple-system,sans-serif" font-size="8" fill="#0a84ff">overflow</text>
+  <!-- Labels -->
+  <text x="16" y="130" font-family="-apple-system,sans-serif" font-size="8" fill="#ffffff55">HDBSCAN</text>
+  <rect x="16" y="134" width="30" height="12" rx="3" fill="#30d158" fill-opacity=".15" stroke="#30d158" stroke-width=".7"/>
+  <text x="19" y="143" font-family="-apple-system,sans-serif" font-size="7" fill="#30d158">E0202</text>
+  <rect x="52" y="134" width="30" height="12" rx="3" fill="#30d158" fill-opacity=".15" stroke="#30d158" stroke-width=".7"/>
+  <text x="55" y="143" font-family="-apple-system,sans-serif" font-size="7" fill="#30d158">E0101</text>
+  <rect x="88" y="134" width="36" height="12" rx="3" fill="#ffffff11" stroke="#ffffff22" stroke-width=".7"/>
+  <text x="91" y="143" font-family="-apple-system,sans-serif" font-size="7" fill="#ffffff44">nominal</text>
+  <!-- Metrics -->
+  <text x="200" y="138" font-family="-apple-system,sans-serif" font-size="20" font-weight="600" fill="#ffffff" letter-spacing="-1">99.69%</text>
+  <text x="200" y="152" font-family="-apple-system,sans-serif" font-size="8" fill="#ffffff55">recall — Riscure Piñata</text>
+  <text x="200" y="168" font-family="-apple-system,sans-serif" font-size="20" font-weight="600" fill="#0a84ff" letter-spacing="-1">16</text>
+  <text x="218" y="168" font-family="-apple-system,sans-serif" font-size="8" fill="#ffffff55" dy="-4"> flaw classes</text>
+  <text x="200" y="180" font-family="-apple-system,sans-serif" font-size="8" fill="#ffffff33">no source code · no recompilation</text>
+</svg></div>
     <div class="fw-links">
       <a href="https://doi.org/10.1007/s10207-025-01092-2" target="_blank" class="fw-link">DOI ↗</a>
       <a href="https://link.springer.com/content/pdf/10.1007/s10207-025-01092-2.pdf" target="_blank" class="fw-link">PDF ↗</a>
       <a href="https://github.com/JorgeBarredo14/CARNYX" target="_blank" class="fw-link">GitHub ↗</a>
     </div>
     <div class="fw-body">
-      <p>CARNYX is the first framework in the series and establishes the core methodology: use the power consumption of a microcontroller as a hardware-level signal to classify which type of software vulnerability is present in the running firmware, before any crash or observable failure occurs in the field.</p>
-      <p>Power traces are acquired with a current probe attached to the supply rail of the device under test. CARNYX does not require any software modification, debug interfaces, or special firmware builds. Traces are processed through a signal conditioning pipeline and fed to an <strong>unsupervised HDBSCAN clustering model</strong> that groups execution behaviours by vulnerability class. A calibration phase builds a behavioural baseline; subsequent traces are compared against it to detect and categorise deviations.</p>
-      <p>CARNYX was validated on three distinct hardware platforms to study how peripheral complexity affects side-channel leakage quality — a previously underexplored variable in embedded SCA research.</p>
+      <p>CARNYX establishes the core methodology of the series: use the power consumption of a microcontroller as a hardware-level signal to <strong>classify which type of software vulnerability is present</strong> in running firmware — before any crash or field failure occurs.</p>
+      <p>Power traces are acquired with a current probe on the supply rail. No software modification, debug interfaces, or special firmware builds are needed. An <strong>unsupervised HDBSCAN clustering model</strong> builds a behavioural baseline during calibration; subsequent traces are compared to detect and categorise deviations.</p>
       <div class="fw-results">
-        <div class="res-box">
-          <span class="res-label">Riscure Piñata (STM32F4)</span>
-          <div class="res-big green">99.69%</div>
-          <div class="res-sub">Recall — high-precision, dedicated security evaluation board</div>
-        </div>
-        <div class="res-box">
-          <span class="res-label">NUCLEO-144 · Serial</span>
-          <div class="res-big blue">86.88%</div>
-          <div class="res-sub">Recall — standard dev board, serial interface</div>
-        </div>
-        <div class="res-box">
-          <span class="res-label">NUCLEO-144 · Ethernet</span>
-          <div class="res-big" style="color:var(--t2)">51.25%</div>
-          <div class="res-sub">Recall — Ethernet peripheral noise impact quantified</div>
-        </div>
-        <div class="res-box">
-          <span class="res-label">BeagleBone Black (ARM A8)</span>
-          <div class="res-big" style="color:var(--t2)">53.67%</div>
-          <div class="res-sub">Recall — medium-end Linux SBC, OS noise present</div>
-        </div>
+        <div class="res"><span class="res-lbl">Riscure Piñata (STM32F4)</span><div class="res-big g">99.69%</div><div class="res-sub">Recall — dedicated security eval board, high SNR</div></div>
+        <div class="res"><span class="res-lbl">NUCLEO-144 · Serial</span><div class="res-big b">86.88%</div><div class="res-sub">Recall — standard dev board, serial port</div></div>
+        <div class="res"><span class="res-lbl">NUCLEO-144 · Ethernet</span><div class="res-big" style="color:var(--t2)">51.25%</div><div class="res-sub">Peripheral noise impact quantified for first time</div></div>
+        <div class="res"><span class="res-lbl">BeagleBone Black</span><div class="res-big" style="color:var(--t2)">53.67%</div><div class="res-sub">ARM Cortex-A8, Linux OS noise environment</div></div>
       </div>
+      <p>CARNYX is <strong>the first framework to quantify how communication peripheral selection affects side-channel leakage quality</strong> — a previously underexplored variable in embedded SCA research. Results directly inform attack surface prioritisation decisions in firmware security assessments.</p>
+    </div>
+  </div>
+
+  <!-- STATOODLE -->
+  <div class="fw-item reveal">
+    <div class="fw-header">
+      <span class="fw-badge">Side Project · EC-TEL 2023</span>
+      <div class="fw-name">Statoodle</div>
+      <p class="fw-tagline">Learning analytics platform extending Moodle — turning raw exported logs into actionable quiz performance reports, student efficiency metrics, and a behavioural warning layer for online assessments.</p>
+    </div>
+    <div class="fw-img"><svg viewBox="0 0 420 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+  <rect width="420" height="200" fill="#111" rx="10"/>
+  <text x="16" y="22" font-family="-apple-system,sans-serif" font-size="9" fill="#ffffff44" letter-spacing="2">STATOODLE — MOODLE ANALYTICS</text>
+  <!-- Quiz performance bars -->
+  <text x="16" y="44" font-family="-apple-system,sans-serif" font-size="7" fill="#ffffff44">QUIZ DIFFICULTY INDEX</text>
+  <rect x="16" y="50" width="90" height="8" rx="2" fill="#30d158" fill-opacity=".7"/>
+  <rect x="16" y="63" width="65" height="8" rx="2" fill="#30d158" fill-opacity=".5"/>
+  <rect x="16" y="76" width="110" height="8" rx="2" fill="#30d158" fill-opacity=".6"/>
+  <rect x="16" y="89" width="40" height="8" rx="2" fill="#ffd60a" fill-opacity=".7"/>
+  <rect x="16" y="102" width="120" height="8" rx="2" fill="#30d158" fill-opacity=".55"/>
+  <text x="112" y="58" font-family="-apple-system,sans-serif" font-size="7" fill="#ffffff44">0.87</text>
+  <text x="86" y="71" font-family="-apple-system,sans-serif" font-size="7" fill="#ffffff44">0.62</text>
+  <text x="132" y="84" font-family="-apple-system,sans-serif" font-size="7" fill="#ffffff44">0.91</text>
+  <text x="61" y="97" font-family="-apple-system,sans-serif" font-size="7" fill="#ffd60a">0.31 ⚠</text>
+  <text x="142" y="110" font-family="-apple-system,sans-serif" font-size="7" fill="#ffffff44">0.95</text>
+  <!-- Divider -->
+  <line x1="170" y1="40" x2="170" y2="140" stroke="#ffffff11" stroke-width="1"/>
+  <!-- Right: activity heatmap -->
+  <text x="185" y="44" font-family="-apple-system,sans-serif" font-size="7" fill="#ffffff44">ACTIVITY LOG HEATMAP</text>
+  <g opacity=".85">
+    <rect x="185" y="50" width="12" height="12" rx="2" fill="#0a84ff" fill-opacity=".8"/>
+    <rect x="200" y="50" width="12" height="12" rx="2" fill="#0a84ff" fill-opacity=".4"/>
+    <rect x="215" y="50" width="12" height="12" rx="2" fill="#0a84ff" fill-opacity=".2"/>
+    <rect x="230" y="50" width="12" height="12" rx="2" fill="#0a84ff" fill-opacity=".6"/>
+    <rect x="245" y="50" width="12" height="12" rx="2" fill="#0a84ff"/>
+    <rect x="185" y="66" width="12" height="12" rx="2" fill="#0a84ff" fill-opacity=".3"/>
+    <rect x="200" y="66" width="12" height="12" rx="2" fill="#0a84ff" fill-opacity=".9"/>
+    <rect x="215" y="66" width="12" height="12" rx="2" fill="#0a84ff" fill-opacity=".5"/>
+    <rect x="230" y="66" width="12" height="12" rx="2" fill="#0a84ff" fill-opacity=".7"/>
+    <rect x="245" y="66" width="12" height="12" rx="2" fill="#ffd60a" fill-opacity=".8"/>
+    <rect x="185" y="82" width="12" height="12" rx="2" fill="#0a84ff" fill-opacity=".6"/>
+    <rect x="200" y="82" width="12" height="12" rx="2" fill="#0a84ff" fill-opacity=".2"/>
+    <rect x="215" y="82" width="12" height="12" rx="2" fill="#0a84ff" fill-opacity=".8"/>
+    <rect x="230" y="82" width="12" height="12" rx="2" fill="#ffd60a" fill-opacity=".9"/>
+    <rect x="245" y="82" width="12" height="12" rx="2" fill="#0a84ff" fill-opacity=".4"/>
+  </g>
+  <text x="262" y="85" font-family="-apple-system,sans-serif" font-size="7" fill="#ffd60a">⚠ suspicious</text>
+  <!-- Bottom stats -->
+  <line x1="16" y1="128" x2="404" y2="128" stroke="#ffffff0a" stroke-width="1"/>
+  <text x="16" y="146" font-family="-apple-system,sans-serif" font-size="9" font-weight="500" fill="#ffffff88">EC-TEL 2023</text>
+  <text x="16" y="160" font-family="-apple-system,sans-serif" font-size="8" fill="#ffffff44">Presented at 18th European Conference on Technology Enhanced Learning</text>
+  <text x="16" y="175" font-family="-apple-system,sans-serif" font-size="8" fill="#ffffff33">Free MOOC available · Strong uptake across Spanish universities</text>
+  <text x="16" y="189" font-family="-apple-system,sans-serif" font-size="8" fill="#0a84ff55">lnkd.in/egMFtbKh · MOOC (Ruth Cobos Pérez et al.)</text>
+</svg></div>
+    <div class="fw-links">
+      <a href="https://doi.org/10.1007/978-3-031-42682-7_70" target="_blank" class="fw-link">DOI ↗</a>
+      <a href="https://github.com/JorgeBarredo14/Statoodle" target="_blank" class="fw-link">GitHub ↗</a>
+      <a href="https://lnkd.in/egMFtbKh" target="_blank" class="fw-link">Free MOOC ↗</a>
+    </div>
+    <div class="fw-body">
+      <p>My main professional focus is cybersecurity. During my Master's years, I pursued an independent track in learning analytics, guided by a simple principle: <strong>technology matters when it solves real needs</strong>. Statoodle was built to help instructors make practical use of Moodle data — turning exported reports and logs into information usable in day-to-day teaching.</p>
+      <p>Concretely, it produces (i) quiz performance reports including item difficulty estimates and student efficiency, and (ii) structured Excel outputs from activity logs to support course monitoring. It also includes a <strong>warning layer for potentially suspicious behaviour</strong> during quizzes. The tool was designed for non-technical users and instructors who do not have programming backgrounds.</p>
+      <p>The work was presented at EC-TEL 2023. What I find most exciting is its momentum beyond the original project: a new free <strong>MOOC</strong> (by Ruth Cobos Pérez, Pedro Moreno-Marcos, Antonio Balderas, Miguel Ángel Conde González, and Manuel Freire) is showcasing Statoodle to the education community, seeing strong uptake across Spanish universities.</p>
     </div>
   </div>
 
@@ -613,11 +610,11 @@ footer p{font-size:.68rem;color:var(--t4);letter-spacing:.03em}
 
 <hr>
 
-<!-- ───────────── PUBLICATIONS ───────────── -->
+<!-- PUBLICATIONS -->
 <section id="publications">
 <div class="wrap">
-  <span class="s-eyebrow reveal">Papers</span>
-  <h2 class="s-title reveal">Published Papers</h2>
+  <span class="s-ey reveal">Papers</span>
+  <h2 class="s-ti reveal">Published Papers</h2>
   <div class="pub-list">
 
     <div class="pub reveal">
@@ -631,9 +628,11 @@ footer p{font-size:.68rem;color:var(--t4);letter-spacing:.03em}
           <a href="https://link.springer.com/content/pdf/10.1007/s10207-025-01092-2.pdf" target="_blank" class="pub-btn">PDF ↗</a>
           <button class="pub-btn" onclick="toggleBib(this)">BibTeX</button>
         </div>
-        <div class="bib">@article{Barredo2025Carnyx,
-  title   = {CARNYX: A framework for vulnerability detection via power consumption analysis in embedded systems},
-  author  = {Barredo, Jorge and Eceiza, Maialen and Flores, Jose Luis and Iturbe, Mikel},
+        <pre class="bib">@article{Barredo2025Carnyx,
+  title   = {CARNYX: A framework for vulnerability detection via
+             power consumption analysis in embedded systems},
+  author  = {Barredo, Jorge and Eceiza, Maialen and
+             Flores, Jose Luis and Iturbe, Mikel},
   journal = {International Journal of Information Security},
   volume  = {24},
   number  = {4},
@@ -641,7 +640,7 @@ footer p{font-size:.68rem;color:var(--t4);letter-spacing:.03em}
   year    = {2025},
   issn    = {1615-5270},
   doi     = {10.1007/s10207-025-01092-2}
-}</div>
+}</pre>
       </div>
     </div>
 
@@ -655,15 +654,17 @@ footer p{font-size:.68rem;color:var(--t4);letter-spacing:.03em}
           <a href="https://doi.org/10.1016/j.cose.2025.104692" target="_blank" class="pub-btn doi">DOI ↗</a>
           <button class="pub-btn" onclick="toggleBib(this)">BibTeX</button>
         </div>
-        <div class="bib">@article{Barredo2025Gjallarhorn,
-  title   = {GJALLARHORN: A framework for vulnerability detection via electromagnetic side-channel analysis in embedded systems},
-  author  = {Barredo, Jorge and Eceiza, Maialen and Flores, Jose Luis and Iturbe, Mikel},
-  journal = {Computers \& Security},
+        <pre class="bib">@article{Barredo2025Gjallarhorn,
+  title   = {GJALLARHORN: A framework for vulnerability detection via
+             electromagnetic side-channel analysis in embedded systems},
+  author  = {Barredo, Jorge and Eceiza, Maialen and
+             Flores, Jose Luis and Iturbe, Mikel},
+  journal = {Computers {\&} Security},
   pages   = {104692},
   year    = {2025},
   issn    = {0167-4048},
   doi     = {10.1016/j.cose.2025.104692}
-}</div>
+}</pre>
       </div>
     </div>
 
@@ -678,10 +679,14 @@ footer p{font-size:.68rem;color:var(--t4);letter-spacing:.03em}
           <a href="https://dl.acm.org/doi/pdf/10.1145/3696630.3728497" target="_blank" class="pub-btn">PDF ↗</a>
           <button class="pub-btn" onclick="toggleBib(this)">BibTeX</button>
         </div>
-        <div class="bib">@inproceedings{Barredo2025Gaflerna,
-  title     = {{GAFLERNA} Ahoy! Integrating {EM} Side-Channel Analysis into Traditional Fuzzing Workflows},
-  author    = {Barredo, Jorge and Petke, Justyna and Clark, David and Blackwell, Dan and Eceiza, Maialen and Flores, Jose Luis and Iturbe, Mikel},
-  booktitle = {Proceedings of the 33rd {ACM} International Conference on the Foundations of Software Engineering},
+        <pre class="bib">@inproceedings{Barredo2025Gaflerna,
+  title     = {{GAFLERNA} {Ahoy!} Integrating {EM} Side-Channel
+               Analysis into Traditional Fuzzing Workflows},
+  author    = {Barredo, Jorge and Petke, Justyna and Clark, David
+               and Blackwell, Dan and Eceiza, Maialen and
+               Flores, Jose Luis and Iturbe, Mikel},
+  booktitle = {Proceedings of the 33rd {ACM} International
+               Conference on the Foundations of Software Engineering},
   series    = {{FSE} Companion '25},
   pages     = {550--554},
   year      = {2025},
@@ -689,7 +694,7 @@ footer p{font-size:.68rem;color:var(--t4);letter-spacing:.03em}
   location  = {Trondheim, Norway},
   publisher = {Association for Computing Machinery},
   doi       = {10.1145/3696630.3728497}
-}</div>
+}</pre>
       </div>
     </div>
 
@@ -703,15 +708,19 @@ footer p{font-size:.68rem;color:var(--t4);letter-spacing:.03em}
         <div class="pub-actions">
           <button class="pub-btn" onclick="toggleBib(this)">BibTeX</button>
         </div>
-        <div class="bib">@inproceedings{Barredo2025Sow,
-  title     = {Sow Smarter, Not Harder: Evaluating {LLM}-generated Seeds for Fuzzing Critical Infrastructure},
-  author    = {Barredo, Jorge and Eceiza, Maialen and Flores, Jose Luis and Iturbe, Mikel},
-  booktitle = {Proceedings of the 20th International Conference on Critical Information Infrastructures Security ({CRITIS} 2025)},
+        <pre class="bib">@inproceedings{Barredo2025Sow,
+  title     = {Sow Smarter, Not Harder: Evaluating {LLM}-generated
+               Seeds for Fuzzing Critical Infrastructure},
+  author    = {Barredo, Jorge and Eceiza, Maialen and
+               Flores, Jose Luis and Iturbe, Mikel},
+  booktitle = {Proceedings of the 20th International Conference on
+               Critical Information Infrastructures Security
+               ({CRITIS} 2025)},
   year      = {2025},
   month     = oct,
-  location  = {J{\"o}nk{\"o}ping, Sweden},
+  location  = {J{"o}nk{"o}ping, Sweden},
   publisher = {Springer}
-}</div>
+}</pre>
       </div>
     </div>
 
@@ -726,10 +735,14 @@ footer p{font-size:.68rem;color:var(--t4);letter-spacing:.03em}
           <a href="https://github.com/JorgeBarredo14/Statoodle" target="_blank" class="pub-btn">GitHub ↗</a>
           <button class="pub-btn" onclick="toggleBib(this)">BibTeX</button>
         </div>
-        <div class="bib">@inproceedings{MorenoMarcos2023Statoodle,
-  title     = {Statoodle: A Learning Analytics Tool to Analyze {Moodle} Students' Actions and Prevent Cheating},
-  author    = {Moreno-Marcos, Pedro Manuel and Barredo, Jorge and Mu{\~n}oz-Merino, Pedro J. and Delgado Kloos, Carlos},
-  booktitle = {Responsive and Sustainable Educational Futures: 18th European Conference on Technology Enhanced Learning, {EC-TEL} 2023},
+        <pre class="bib">@inproceedings{MorenoMarcos2023Statoodle,
+  title     = {Statoodle: A Learning Analytics Tool to Analyze
+               {Moodle} Students' Actions and Prevent Cheating},
+  author    = {Moreno-Marcos, Pedro Manuel and Barredo, Jorge and
+               Mu{\~n}oz-Merino, Pedro J. and Delgado Kloos, Carlos},
+  booktitle = {Responsive and Sustainable Educational Futures:
+               18th European Conference on Technology Enhanced Learning,
+               {EC-TEL} 2023},
   series    = {Lecture Notes in Computer Science},
   volume    = {14200},
   pages     = {736--741},
@@ -738,7 +751,7 @@ footer p{font-size:.68rem;color:var(--t4);letter-spacing:.03em}
   location  = {Aveiro, Portugal},
   publisher = {Springer-Verlag},
   doi       = {10.1007/978-3-031-42682-7_70}
-}</div>
+}</pre>
       </div>
     </div>
 
@@ -748,136 +761,85 @@ footer p{font-size:.68rem;color:var(--t4);letter-spacing:.03em}
 
 <hr>
 
-<!-- ───────────── EXPERIENCE ───────────── -->
+<!-- EXPERIENCE -->
 <section id="experience">
 <div class="wrap">
-  <span class="s-eyebrow reveal">Experience</span>
-  <h2 class="s-title reveal">Work &amp; Education</h2>
+  <span class="s-ey reveal">Experience</span>
+  <h2 class="s-ti reveal">Work &amp; Education</h2>
   <div class="exp-grid">
 
     <div class="reveal">
       <div class="exp-col-head">Work</div>
       <div class="tl">
-
         <div class="ti">
           <div class="ti-period">Nov 2022 – Jan 2026</div>
           <div class="ti-org">IKERLAN · Mondragon Unibertsitatea</div>
           <div class="ti-role">Embedded Security Research Engineer (PhD)</div>
-          <p class="ti-desc">Designed and operated embedded/IoT firmware fuzzing pipelines on Linux. Developed harnesses, managed corpora with LLM-assisted seed generation. Triaged crashes with sanitizers and gdb into reproducible, minimised test cases. Integrated EM/power/timing side-channel feedback for attack surface prioritisation. Containerised campaigns with Docker for repeatable CI execution; aligned with IEC 62443.</p>
-          <div class="ti-tags">
-            <span class="ti-tag">AFL++</span><span class="ti-tag">libFuzzer</span>
-            <span class="ti-tag">Firm-AFL/QEMU</span><span class="ti-tag">Harnessing</span>
-            <span class="ti-tag">ASan/UBSan/MSan</span><span class="ti-tag">gdb</span>
-            <span class="ti-tag">EM/Power/Timing SCA</span><span class="ti-tag">HDBSCAN</span>
-            <span class="ti-tag">Python</span><span class="ti-tag">C/C++</span>
-            <span class="ti-tag">Docker</span><span class="ti-tag">Git/CI</span>
-            <span class="ti-tag">IEC 62443</span><span class="ti-tag">STM32</span>
-            <span class="ti-tag">Ghidra</span><span class="ti-tag">LLM seed gen</span>
-          </div>
+          <p class="ti-desc">Designed and operated firmware fuzzing pipelines on Linux. Developed harnesses, managed corpora with LLM-assisted seed generation, triaged crashes with sanitizers and gdb into reproducible minimised test cases. Integrated EM/power/timing SCA feedback for attack surface prioritisation. Containerised campaigns with Docker for CI; aligned with IEC 62443.</p>
+          <div class="ti-tags"><span class="ti-tag">AFL++</span><span class="ti-tag">libFuzzer</span><span class="ti-tag">Firm-AFL/QEMU</span><span class="ti-tag">Test Harness</span><span class="ti-tag">Corpus Mgmt</span><span class="ti-tag">ASan/UBSan/MSan</span><span class="ti-tag">gdb</span><span class="ti-tag">Crash Triage</span><span class="ti-tag">EM/Power/Timing SCA</span><span class="ti-tag">HDBSCAN</span><span class="ti-tag">Python</span><span class="ti-tag">C/C++</span><span class="ti-tag">Docker</span><span class="ti-tag">Git/CI</span><span class="ti-tag">IEC 62443</span><span class="ti-tag">STM32</span><span class="ti-tag">Ghidra</span><span class="ti-tag">LLM seed gen</span></div>
         </div>
-
         <div class="ti">
           <div class="ti-period">Sep – Dec 2024</div>
           <div class="ti-org">University College London</div>
           <div class="ti-role">Visiting PhD Researcher · SOLAR Group</div>
-          <p class="ti-desc">International PhD mention. Extended embedded fuzzing with live EM side-channel integration, collaborating with Prof. Justyna Petke and Prof. David Clark. Direct output: GAFLERNA, published at ACM FSE 2025.</p>
-          <div class="ti-tags">
-            <span class="ti-tag">EM SCA</span><span class="ti-tag">AFL++</span>
-            <span class="ti-tag">SDR</span><span class="ti-tag">Signal Processing</span>
-            <span class="ti-tag">Research Collaboration</span>
-          </div>
+          <p class="ti-desc">International PhD mention. Extended fuzzing with live EM SCA integration — direct output: GAFLERNA at ACM FSE 2025. Worked with Prof. Justyna Petke and Prof. David Clark.</p>
+          <div class="ti-tags"><span class="ti-tag">EM SCA</span><span class="ti-tag">AFL++</span><span class="ti-tag">SDR</span><span class="ti-tag">Signal Processing</span><span class="ti-tag">Research Collaboration</span></div>
         </div>
-
         <div class="ti">
           <div class="ti-period">May – Oct 2022</div>
           <div class="ti-org">DNV</div>
           <div class="ti-role">Protocol Testing Consultant</div>
-          <p class="ti-desc">Protocol conformance and interoperability testing for energy and telecom devices including DLMS. Built reproducible HW/SW validation testbeds and Python automation. Documented results in Jira/Confluence for IEC/ISO-aligned certification workflows.</p>
-          <div class="ti-tags">
-            <span class="ti-tag">DLMS</span><span class="ti-tag">Protocol Conformance</span>
-            <span class="ti-tag">Interoperability Testing</span><span class="ti-tag">Python</span>
-            <span class="ti-tag">Jira/Confluence</span><span class="ti-tag">IEC/ISO</span>
-            <span class="ti-tag">Energy Sector</span>
-          </div>
+          <p class="ti-desc">Protocol conformance and interoperability testing for energy/telecom devices (DLMS). Reproducible HW/SW testbeds and Python automation for IEC/ISO-aligned certification. Results tracked in Jira/Confluence.</p>
+          <div class="ti-tags"><span class="ti-tag">DLMS</span><span class="ti-tag">Protocol Conformance</span><span class="ti-tag">Interoperability Testing</span><span class="ti-tag">Python</span><span class="ti-tag">IEC/ISO</span><span class="ti-tag">Energy Sector</span><span class="ti-tag">Jira/Confluence</span></div>
         </div>
-
         <div class="ti">
           <div class="ti-period">Jun 2021 – Feb 2022</div>
           <div class="ti-org">Ericsson</div>
           <div class="ti-role">R&amp;D Software Developer Trainee</div>
-          <p class="ti-desc">Implemented and tested security mechanisms for 5G core network functions. Configured mTLS and validated Istio sidecar injection in cloud-native deployments. Traffic filtering and secure communication patterns in C/C++ and Python.</p>
-          <div class="ti-tags">
-            <span class="ti-tag">5G Core</span><span class="ti-tag">C/C++</span>
-            <span class="ti-tag">Python</span><span class="ti-tag">mTLS</span>
-            <span class="ti-tag">Istio</span><span class="ti-tag">Kubernetes</span>
-            <span class="ti-tag">Docker</span><span class="ti-tag">Service Mesh</span>
-          </div>
+          <p class="ti-desc">5G core security mechanisms in C/C++ and Python. Configured mTLS and validated Istio sidecar injection in cloud-native deployments (Docker, Kubernetes). Traffic filtering and secure service mesh patterns.</p>
+          <div class="ti-tags"><span class="ti-tag">5G Core</span><span class="ti-tag">C/C++</span><span class="ti-tag">Python</span><span class="ti-tag">mTLS</span><span class="ti-tag">Istio</span><span class="ti-tag">Kubernetes</span><span class="ti-tag">Docker</span><span class="ti-tag">Service Mesh</span><span class="ti-tag">Network Security</span></div>
         </div>
-
         <div class="ti">
           <div class="ti-period">Jul – Aug 2019</div>
           <div class="ti-org">Barcelona Supercomputing Center</div>
           <div class="ti-role">Undergraduate Research Fellow</div>
-          <p class="ti-desc">FPGA-oriented HW/SW co-design for graph workloads. Implemented and benchmarked memory/compute trade-offs using FPGA toolchains and C/C++. Bachelor thesis: Accelerating PageRank with ZCU102-ES2 FPGA (10/10, Honours).</p>
-          <div class="ti-tags">
-            <span class="ti-tag">FPGA</span><span class="ti-tag">HW/SW Co-design</span>
-            <span class="ti-tag">C/C++</span><span class="ti-tag">Xilinx/Vivado</span>
-            <span class="ti-tag">Graph Algorithms</span><span class="ti-tag">HPC</span>
-          </div>
+          <p class="ti-desc">FPGA-oriented HW/SW co-design for graph workloads. Implemented and benchmarked memory/compute trade-offs using FPGA toolchains and C/C++.</p>
+          <div class="ti-tags"><span class="ti-tag">FPGA</span><span class="ti-tag">HW/SW Co-design</span><span class="ti-tag">C/C++</span><span class="ti-tag">Xilinx/Vivado</span><span class="ti-tag">Graph Algorithms</span><span class="ti-tag">HPC</span></div>
         </div>
-
       </div>
     </div>
 
     <div class="reveal">
       <div class="exp-col-head">Education</div>
       <div class="tl">
-
         <div class="ti">
           <div class="ti-period">2022 – 2026</div>
           <div class="ti-org">Mondragon Unibertsitatea</div>
           <div class="ti-role">PhD in Industrial Cybersecurity — cum laude</div>
-          <p class="ti-desc">Fuzzing, side-channel analysis, and LLM-assisted seed generation for embedded and IoT security. International PhD mention (UCL, 2024).</p>
-          <div class="ti-tags">
-            <span class="ti-tag">Fuzzing</span><span class="ti-tag">SCA</span>
-            <span class="ti-tag">Embedded Security</span><span class="ti-tag">LLMs</span>
-            <span class="ti-tag">IoT</span>
-          </div>
+          <p class="ti-desc">Thesis: Novel Techniques for Embedded Fuzzing with Side-Channel Analysis and Seed Optimisation. Frameworks: CARNYX, GJALLARHORN, GAFLERNA, TRENTI.</p>
+          <div class="ti-tags"><span class="ti-tag">Fuzzing</span><span class="ti-tag">SCA</span><span class="ti-tag">Embedded Security</span><span class="ti-tag">LLMs</span><span class="ti-tag">IoT</span></div>
         </div>
-
         <div class="ti">
           <div class="ti-period">2021 – 2022</div>
           <div class="ti-org">Universidad Carlos III de Madrid</div>
           <div class="ti-role">MSc in Cybersecurity (English) — Thesis: 9.7/10</div>
           <p class="ti-desc">Thesis: Protocol for Avoiding Negotiation Reset due to Eavesdropping in Quantum Key Distribution.</p>
-          <div class="ti-tags">
-            <span class="ti-tag">Cryptography</span><span class="ti-tag">QKD</span>
-            <span class="ti-tag">Network Security</span>
-          </div>
+          <div class="ti-tags"><span class="ti-tag">Cryptography</span><span class="ti-tag">QKD</span><span class="ti-tag">Network Security</span><span class="ti-tag">Protocol Design</span></div>
         </div>
-
         <div class="ti">
           <div class="ti-period">2020 – 2022</div>
           <div class="ti-org">Universidad Carlos III de Madrid</div>
           <div class="ti-role">MSc in Telecommunication Engineering — Thesis: 9.6/10</div>
           <p class="ti-desc">Thesis: External Learning Analytics Tool for Aula Global Courses.</p>
-          <div class="ti-tags">
-            <span class="ti-tag">Telecoms</span><span class="ti-tag">Learning Analytics</span>
-            <span class="ti-tag">Web Dev</span>
-          </div>
+          <div class="ti-tags"><span class="ti-tag">Telecoms</span><span class="ti-tag">Learning Analytics</span><span class="ti-tag">Moodle</span><span class="ti-tag">Full-stack</span></div>
         </div>
-
         <div class="ti">
           <div class="ti-period">2016 – 2020</div>
           <div class="ti-org">Universidad de Cantabria</div>
           <div class="ti-role">BSc in Telecommunication Technologies (Telematics) — 10/10 Honours</div>
           <p class="ti-desc">Thesis: Accelerating PageRank with ZCU102-ES2 FPGA.</p>
-          <div class="ti-tags">
-            <span class="ti-tag">Telematics</span><span class="ti-tag">FPGA</span>
-            <span class="ti-tag">HPC</span>
-          </div>
+          <div class="ti-tags"><span class="ti-tag">Telematics</span><span class="ti-tag">FPGA</span><span class="ti-tag">HPC</span><span class="ti-tag">Xilinx</span><span class="ti-tag">PageRank</span></div>
         </div>
-
       </div>
     </div>
 
@@ -887,11 +849,11 @@ footer p{font-size:.68rem;color:var(--t4);letter-spacing:.03em}
 
 <hr>
 
-<!-- ───────────── CONTACT ───────────── -->
+<!-- CONTACT -->
 <section id="contact">
 <div class="wrap">
-  <span class="s-eyebrow reveal">Contact</span>
-  <h2 class="s-title reveal">Let's Connect</h2>
+  <span class="s-ey reveal">Contact</span>
+  <h2 class="s-ti reveal">Let's Connect</h2>
   <div class="contact-cols">
     <div class="contact-bio reveal">
       <p>Open to roles in <strong>embedded security engineering, firmware vulnerability research, and hardware security R&amp;D</strong> — particularly in IoT, automotive, semiconductor, or critical infrastructure sectors.</p>
@@ -936,14 +898,15 @@ footer p{font-size:.68rem;color:var(--t4);letter-spacing:.03em}
 
 <footer>
   <p>© 2026 Jorge Barredo Ferreira</p>
-  <p>Embedded Security · Firmware Fuzzing · Side-Channel Analysis</p>
+  <p>Firmware Fuzzing · Embedded Security · Side-Channel Analysis</p>
 </footer>
 
 <script>
 function toggleBib(btn) {
-  const b = btn.closest('div').querySelector('.bib');
-  b.classList.toggle('open');
-  btn.textContent = b.classList.contains('open') ? 'BibTeX ✕' : 'BibTeX';
+  const pre = btn.closest('div > div').querySelector('pre.bib');
+  if (!pre) return;
+  pre.classList.toggle('open');
+  btn.textContent = pre.classList.contains('open') ? 'BibTeX ✕' : 'BibTeX';
 }
 
 const obs = new IntersectionObserver((entries) => {
@@ -961,7 +924,7 @@ const nls  = document.querySelectorAll('.nav-links a');
 secs.forEach(s => new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting)
-      nls.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id); });
+      nls.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
   });
 }, { threshold: 0.35 }).observe(s));
 </script>
