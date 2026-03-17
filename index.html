@@ -172,6 +172,58 @@ footer p{font-family:var(--m);font-size:.65rem;color:var(--t4);letter-spacing:.0
   .hero-photo{width:150px}
   .about-grid,.exp-grid,.contact-grid{gap:2.5rem 3rem}
 }
+
+/* ── RESEARCH PROGRESSION TIMELINE ── */
+.research-intro { margin-bottom: 2.5rem; }
+.research-intro p { font-size: .97rem; color: var(--t2); line-height: 1.82; }
+.prog-track {
+  display: flex; align-items: flex-start;
+  gap: 0; margin-bottom: 3rem;
+  overflow-x: auto; padding-bottom: .5rem;
+}
+.prog-node {
+  display: flex; flex-direction: column; align-items: center;
+  flex: 1; min-width: 120px; position: relative;
+}
+.prog-node::after {
+  content: '';
+  position: absolute; top: 18px; left: 50%; width: 100%;
+  height: 1px; background: linear-gradient(90deg, var(--blue) 0%, rgba(10,132,255,.25) 100%);
+  z-index: 0;
+}
+.prog-node:last-child::after { display: none; }
+.prog-dot {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--bg2); border: 1.5px solid var(--blue);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--m); font-size: .62rem; font-weight: 500;
+  color: var(--blue); z-index: 1; position: relative;
+  transition: background .2s, border-color .2s;
+}
+.prog-node.active .prog-dot {
+  background: var(--blue); color: #000;
+}
+.prog-label {
+  margin-top: .55rem; text-align: center;
+}
+.prog-name {
+  display: block; font-family: var(--m); font-size: .68rem;
+  font-weight: 500; color: var(--t1); letter-spacing: .04em;
+}
+.prog-year {
+  display: block; font-family: var(--m); font-size: .58rem;
+  color: var(--t3); margin-top: .15rem;
+}
+.prog-channel {
+  display: block; font-family: var(--m); font-size: .56rem;
+  color: var(--blue); margin-top: .18rem; letter-spacing: .04em;
+  text-transform: uppercase;
+}
+@media (max-width: 540px) {
+  .prog-track { gap: 0; }
+  .prog-node { min-width: 80px; }
+  .prog-name { font-size: .6rem; }
+}
 </style>
 <script type="application/ld+json">
 {
@@ -469,6 +521,48 @@ IoT security. ARM. STM32. ASan UBSan MSan. Ghidra. Docker CI/CD. IEC 62443.
 <div class="wrap">
   <span class="s-ey reveal">Projects</span>
   <h2 class="s-ti reveal">Research &amp; Projects</h2>
+  <!-- ── RESEARCH PROGRESSION TIMELINE ── -->
+  <div class="research-intro">
+    <p>These four frameworks form a coherent research programme — each one extending the previous.
+    CARNYX established power-based vulnerability classification.
+    GJALLARHORN moved to electromagnetic signals, enabling non-contact detection.
+    GAFLERNA closed the loop: EM feedback integrated live into AFL++ during a fuzzing campaign.
+    TRENTI combined all three channels simultaneously for full multimodal in-loop guidance.</p>
+  </div>
+  <div class="prog-track reveal">
+    <div class="prog-node">
+      <div class="prog-dot">I</div>
+      <div class="prog-label">
+        <span class="prog-name">CARNYX</span>
+        <span class="prog-year">2023–2024</span>
+        <span class="prog-channel">Power SCA</span>
+      </div>
+    </div>
+    <div class="prog-node">
+      <div class="prog-dot">II</div>
+      <div class="prog-label">
+        <span class="prog-name">GJALLARHORN</span>
+        <span class="prog-year">2024</span>
+        <span class="prog-channel">EM SCA</span>
+      </div>
+    </div>
+    <div class="prog-node">
+      <div class="prog-dot">III</div>
+      <div class="prog-label">
+        <span class="prog-name">GAFLERNA</span>
+        <span class="prog-year">2024–2025</span>
+        <span class="prog-channel">EM + Fuzzing</span>
+      </div>
+    </div>
+    <div class="prog-node active">
+      <div class="prog-dot">IV</div>
+      <div class="prog-label">
+        <span class="prog-name">TRENTI</span>
+        <span class="prog-year">2025</span>
+        <span class="prog-channel">Multimodal</span>
+      </div>
+    </div>
+  </div>
   <div class="fw-list">
     <div class="fw-card reveal">
       <div class="fw-header">
