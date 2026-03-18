@@ -6,9 +6,14 @@
 <title>Jorge Barredo Ferreira — Firmware Security &amp; Fuzzing Engineer | Embedded Systems | Vulnerability Research</title>
 <meta name="description" content="Jorge Barredo Ferreira — Firmware Security Engineer and PhD in Industrial Cybersecurity. Expert in firmware fuzzing (AFL++, libFuzzer, Firm-AFL/QEMU), embedded vulnerability research, side-channel analysis (EM, power, timing), crash triage, and test harness development for IoT and embedded systems.">
 <meta name="author" content="Jorge Barredo Ferreira">
-<meta property="og:title" content="Jorge Barredo Ferreira — Embedded Security &amp; Fuzzing Engineer">
+<meta property="og:title" content="Jorge Barredo Ferreira — Firmware Security &amp; Fuzzing Engineer | Embedded Systems | Vulnerability Research">
 <meta property="og:description" content="PhD in Industrial Cybersecurity. Firmware fuzzing, vulnerability discovery, and hardware side-channel analysis.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://barredo.info">
+<link rel="canonical" href="https://barredo.info">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Jorge Barredo Ferreira — Firmware Security &amp; Fuzzing Engineer">
+<meta name="twitter:description" content="PhD in Industrial Cybersecurity. Firmware fuzzing, vulnerability discovery, and hardware side-channel analysis.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -43,12 +48,12 @@ nav{position:fixed;top:0;inset-inline:0;z-index:200;height:52px;display:flex;ali
 .mm{display:none;position:fixed;top:52px;inset-inline:0;z-index:199;background:rgba(0,0,0,.97);backdrop-filter:blur(30px);border-bottom:1px solid var(--sep);padding:1.75rem var(--px);flex-direction:column;gap:1.25rem}
 .mm a{font-size:.92rem;color:var(--t1)}
 .mm.open{display:flex}
-#hero{min-height:100svh;display:flex;align-items:center;padding-top:52px}
-.hero-inner{max-width:var(--max);margin:0 auto;width:100%;padding:clamp(3rem,8vw,5.5rem) var(--px);display:grid;grid-template-columns:1fr 200px;gap:2rem 5rem;align-items:center}
+#hero{min-height:auto;display:flex;align-items:center;padding-top:52px}
+.hero-inner{max-width:var(--max);margin:0 auto;width:100%;padding:clamp(5rem,10vw,7rem) var(--px) clamp(3rem,6vw,4.5rem);display:grid;grid-template-columns:1fr 200px;gap:2rem 5rem;align-items:center}
 .hero-tag{font-size:.65rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--blue);display:block;margin-bottom:.35rem;opacity:0;animation:up .45s .05s forwards}
 .hero-tag2{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);display:block;margin-bottom:1.35rem;opacity:0;animation:up .45s .12s forwards}
-.hero-name{font-size:clamp(2.8rem,6.8vw,4.8rem);font-weight:500;color:var(--t0);letter-spacing:-.04em;line-height:1.05;margin-bottom:.65rem;opacity:0;animation:up .55s .2s forwards}
-.hero-role{font-size:clamp(.82rem,1.8vw,.93rem);font-weight:300;color:var(--t3);margin-bottom:1.6rem;opacity:0;animation:up .5s .3s forwards}
+.hero-name{font-size:clamp(2rem,4.5vw,3.8rem);font-weight:500;color:var(--t0);letter-spacing:-.04em;line-height:1.05;margin-bottom:.65rem;white-space:nowrap;opacity:0;animation:up .55s .2s forwards}
+.hero-role{font-size:clamp(.78rem,1.5vw,.9rem);font-weight:300;color:var(--t3);margin-bottom:1.6rem;white-space:nowrap;opacity:0;animation:up .5s .3s forwards}
 .hero-bio{font-size:clamp(.9rem,1.8vw,1.01rem);color:var(--t2);line-height:1.8;max-width:560px;margin-bottom:1.75rem;opacity:0;animation:up .5s .4s forwards}
 .hero-bio strong{color:var(--t1);font-weight:400}
 .hero-contacts{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1.75rem;opacity:0;animation:up .45s .48s forwards}
@@ -128,7 +133,7 @@ pre.bib.open{display:block}
 .tl{position:relative;padding-left:1.25rem}
 .tl::before{content:'';position:absolute;left:0;top:.35rem;bottom:0;width:1px;background:linear-gradient(var(--sep2) 80%,transparent)}
 .ti{position:relative;padding-bottom:2.25rem}
-.ti::before{content:'';position:absolute;left:-1.25rem;top:.3rem;width:5px;height:5px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 3px rgba(10,132,255,.14)}
+.ti::before{content:'';position:absolute;left:calc(-1.25rem - 2px);top:.35rem;width:5px;height:5px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 3px rgba(10,132,255,.14)}
 .ti-period{font-family:var(--m);font-size:.62rem;color:var(--t3);margin-bottom:.18rem}
 .ti-org{font-size:.78rem;font-weight:400;color:var(--blue);margin-bottom:.18rem}
 .ti-role{font-size:.92rem;color:var(--t1);font-weight:400;margin-bottom:.4rem}
@@ -161,6 +166,7 @@ footer p{font-family:var(--m);font-size:.65rem;color:var(--t4);letter-spacing:.0
 .stagger.visible>*:nth-child(5){transition-delay:.33s}
 .stagger.visible>*:nth-child(6){transition-delay:.40s}
 @media(max-width:860px){
+  .hero-name,.hero-role{white-space:normal}
   .hero-inner{grid-template-columns:1fr;gap:2rem}
   .hero-photo-col{order:-1;justify-content:flex-start}
   .hero-photo{width:100px;border-radius:14px}
@@ -478,11 +484,12 @@ figure.gallery-item:hover figcaption, .gallery-item:hover .gallery-caption {
 
 /* ── IMPACT STRIP ── */
 #impact{background:var(--bg1);border-top:1px solid var(--sep);border-bottom:1px solid var(--sep)}
-.impact-inner{max-width:var(--max);margin:0 auto;padding:2.25rem var(--px);display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;align-items:start}
-.impact-item{display:flex;flex-direction:column;gap:.4rem}
-.impact-n{font-family:var(--m);font-size:1.55rem;font-weight:500;color:var(--t0);letter-spacing:-.03em;line-height:1}
-.impact-n span{font-size:.9rem;font-weight:300;color:var(--blue);letter-spacing:0;margin-left:.2rem}
-.impact-l{font-size:.78rem;color:var(--t2);line-height:1.5}
+.impact-inner{max-width:var(--max);margin:0 auto;padding:0 var(--px);display:grid;grid-template-columns:repeat(4,1fr);gap:0;align-items:start;border-top:1px solid var(--sep)}
+.impact-item{display:flex;flex-direction:column;gap:.5rem;padding:1.6rem 1.75rem;border-right:1px solid var(--sep);border-bottom:1px solid var(--sep)}
+.impact-item:nth-child(4n){border-right:none}.impact-item:nth-child(4n+1){border-left:none}
+.impact-n{font-family:var(--m);font-size:2rem;font-weight:500;color:var(--t0);letter-spacing:-.04em;line-height:1}
+.impact-n span{display:block;font-family:var(--m);font-size:.62rem;color:var(--blue);letter-spacing:.1em;text-transform:uppercase;margin-top:.2rem}
+.impact-l{font-size:.76rem;color:var(--t2);line-height:1.55}
 @media(max-width:700px){.impact-inner{grid-template-columns:1fr 1fr;gap:1rem}}
 @media(max-width:400px){.impact-inner{grid-template-columns:1fr 1fr}}
 </style>
@@ -563,7 +570,7 @@ IoT security. ARM. STM32. ASan UBSan MSan. Ghidra. Docker CI/CD. IEC 62443.
         <h1 class="hero-name">Jorge Barredo Ferreira</h1>
     <p class="hero-role">PhD in Industrial Cybersecurity &nbsp;·&nbsp; Embedded &amp; Firmware Security Engineer</p>
         <p class="hero-bio">
-      I find vulnerabilities in <strong>embedded and IoT firmware</strong> before they reach production — and I have the published research to prove it. My PhD (Mondragon Unibertsitatea, <strong>cum laude</strong>, research stay at <strong>UCL</strong>) produced four peer-reviewed frameworks that extend fuzzing with hardware side-channel analysis, now cited across the embedded security community. Previously: <strong>5G core security at Ericsson</strong>, industrial protocol testing at <strong>DNV</strong>, FPGA acceleration at <strong>Barcelona Supercomputing Center</strong>.
+      I find security weaknesses in the software running on <strong>IoT and embedded devices</strong> — connected hardware that powers critical infrastructure, industry, and everyday products — before they can be exploited. My <strong>PhD</strong> (Mondragon Unibertsitatea, cum laude, research stay at <strong>UCL London</strong>) focused on automating this process: I built tools that stress-test device software at scale using <strong>fuzzing</strong> and <strong>LLMs</strong>, and use <strong>side-channel analysis</strong> — physical hardware signals — to detect hidden flaws, earning a <strong>🥈 Young CRITIS Award</strong> along the way. Previously I worked on <strong>5G network security at Ericsson</strong>, industrial device certification at <strong>DNV</strong>, and high-performance computing research at <strong>Barcelona Supercomputing Center</strong>.
     </p>
     <div class="hero-contacts">
       <a href="mailto:jorgebarredo14@gmail.com" class="cpill">jorgebarredo14@gmail.com</a>
@@ -604,23 +611,23 @@ IoT security. ARM. STM32. ASan UBSan MSan. Ghidra. Docker CI/CD. IEC 62443.
   </div>
 </div>
 </section>
-<section id="impact" aria-label="Key results">
+<section id="impact" aria-label="Key results" style="background:var(--bg1)">
   <div class="impact-inner reveal">
     <div class="impact-item">
-      <div class="impact-n">Zero<span>source needed</span></div>
-      <div class="impact-l">Detect firmware vulnerabilities from hardware signals alone — no code access, no binary modification, no debug interface</div>
+      <div class="impact-n">99.69%<span>recall</span></div>
+      <div class="impact-l">Vulnerability detection on STM32 — power side-channel, no source</div>
     </div>
     <div class="impact-item">
       <div class="impact-n">104<span>crash paths</span></div>
-      <div class="impact-l">New paths to real crashes found by GAFLERNA across 4 production IoT programs — bugs that AFL++ with sanitizers never reached</div>
+      <div class="impact-l">New bugs found via EM fuzzing — missed entirely by AFL++ + sanitizers</div>
     </div>
     <div class="impact-item">
-      <div class="impact-n">4→1<span>pipeline</span></div>
-      <div class="impact-l">Four research frameworks unified into a single fuzzing pipeline that works on real hardware, black-box, in CI</div>
+      <div class="impact-n">5<span>papers</span></div>
+      <div class="impact-l">Fuzzing, side-channel analysis, AI-assisted security, and learning analytics</div>
     </div>
     <div class="impact-item">
       <div class="impact-n">🥈<span>award</span></div>
-      <div class="impact-l">Young CRITIS Award 2025 · 5 peer-reviewed papers · ACM FSE, Computers &amp; Security, IJIS, Springer</div>
+      <div class="impact-l">Young CRITIS Award 2025 — LLM seed generation for critical infrastructure fuzzing</div>
     </div>
   </div>
 </section>
@@ -989,6 +996,7 @@ IoT security. ARM. STM32. ASan UBSan MSan. Ghidra. Docker CI/CD. IEC 62443.
         <p class="fw-tagline">Multimodal in-loop side-channel feedback for embedded fuzzing &#x2014; simultaneous EM, power, and timing signals feeding AFL++ via Firm-AFL/QEMU under full black-box conditions.</p>
         </div>
       </div>
+      </div>
       <div class="fw-img"><svg viewBox="0 0 420 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
   <rect width="420" height="200" fill="#111" rx="10"/>
   <text x="16" y="22" font-family="-apple-system,sans-serif" font-size="9" fill="#ffffff44" letter-spacing="2">MULTIMODAL FEEDBACK — TRENTI</text>
@@ -1042,6 +1050,7 @@ IoT security. ARM. STM32. ASan UBSan MSan. Ghidra. Docker CI/CD. IEC 62443.
         <div class="fw-name">GAFLERNA</div>
         <p class="fw-tagline">First integration of live EM side-channel analysis as an in-loop oracle in AFL++ for IoT firmware &#x2014; no target modification, no source code, no recompilation.</p>
         </div>
+      </div>
       </div>
       <div class="fw-img"><svg viewBox="0 0 420 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
   <rect width="420" height="130" fill="#111" rx="10"/>
@@ -1102,6 +1111,7 @@ IoT security. ARM. STM32. ASan UBSan MSan. Ghidra. Docker CI/CD. IEC 62443.
         <p class="fw-tagline">Automated EM side-channel framework classifying <strong>16 firmware vulnerability types</strong> non-invasively &#x2014; validated on STM32 and Raspberry Pi without source code or debug interfaces.</p>
         </div>
       </div>
+      </div>
       <div class="fw-img"><svg viewBox="0 0 420 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
   <rect width="420" height="180" fill="#111" rx="10"/>
   <text x="16" y="22" font-family="-apple-system,sans-serif" font-size="9" fill="#ffffff44" letter-spacing="2">EM SPECTRUM — NUCLEO-144</text>
@@ -1160,6 +1170,7 @@ IoT security. ARM. STM32. ASan UBSan MSan. Ghidra. Docker CI/CD. IEC 62443.
         <p class="fw-tagline">Power side-channel analysis framework for pre-deployment vulnerability detection &#x2014; classifying <strong>16 distinct flaw types</strong> across three hardware platforms, up to 99.69% recall, no source code required.</p>
         </div>
       </div>
+      </div>
       <div class="fw-img"><svg viewBox="0 0 420 190" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
   <defs>
     <linearGradient id="g1" x1="0" y1="0" x2="1" y2="0">
@@ -1214,7 +1225,6 @@ IoT security. ARM. STM32. ASan UBSan MSan. Ghidra. Docker CI/CD. IEC 62443.
     <div style="display:grid;grid-template-columns:72px 1fr;gap:1.25rem;align-items:start">
       <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAABQCAYAAABMIbYpAAAmAElEQVR42tV8eZRc1Xnn77v3vqVerV1dvS9qSWhrEAK0gDHQAmyMY4OJnRZeEsKMY2cOEyZ2nIydcUirPRknk8RxkhkvwYkTxxiCGhtjA44DxGoWswiQWbq1t7ol9b5Ud21vu8v8URLGNk7sjCAn75w6XVWnz3339+63/76vCAD6+8GHhqAuP7/7qqaMdVPWZX2epbo4ZywI+Inpivr8t586+lkAMQAGQOM/yEVnwF28sflPOrPst1OCUDMMtm0jk7CgysuII2CZvMfuPTB+A5WxZAwIgPmPAJANDUG9aUPrx9Y10W/nU44qw1EJr8HMz4eYnYnR3LHaxEzKZje6/F2bu75hDJyBvj4OgP4jAOSrV6cub3DYXee0N0FYDiPYzGKcoBiWixV0t7bQuRduYeMnTkYdbYW1ze0F/NX39j1y663XOqtWHcXo6M8nMT/2ev0BtqTs36xWgkKgTXz46KTOJJKiUl5hnLswsYZcLuGiHVsROS7za4HqXb/mUolw/56v7zswOgoDIjAigAh79vTz3t5+vnPnMIaHfyjC/f39fPfuc9nQ0OiP6O6ePf18aGj09dXBVfnERy1m782kw2/ZsQivvPTCNZOTJ2iprLFt60U48cIItr15G5atGDaHWdfeRCemZsyBYyf//rmRY994+tDykwDmf3xhYwwN7drF+nt7DQ0OagBY1dfn7tqRtSKP+F8M3hcACE4r8+tmuGgV4HZtar+sM2ce6mhqxca1PTg8No4aJXDNL7wdI/v2I/QraOhsRFd7AbVy0SgliDRhdmEFk8v+itPQenJqdlqSYgfzq9Y+OvLiM3sffvjpA2du8r6377ghnzS/OjM3uzMI4pTn8OVCPlllXvqez9317KcAlAYGwAYHzz5IAoDzVxUufMflG56PSsuQsTHretdTvnstmONi9tQMYCK0NnqIawHcfAENLatMNteoIGwWKrCVUogv/Mkf493vfgc2nLsZd375djkzP/WcLTCSTCYbduy46BeXpmdwz7f2Dq+s1J7dsq7jY9s3d+KctQUcmCm/8LVHRq89MDo/8/uvA0g+ALA9K7WZpkJ6em5m5S3CJt7R3QwV1Wh+fgZZz0Zng4u4soLGjm6s33oZWrrXkJPNsxgWiUTKxJqZjatXm01r2/X9//BVbWoVEUVxpwVxoes6m46dXFDPjEyHE/PhVwqtTddKg9ZyOdSFQkGd093Unk16bzt4av7rDz4oK6f97FlzQXwYMP394F9/YH5fMpU5mHL1jcqvGhnUqDntojHjACpGpn0VNlx8NZINbVDg0FoDChCMSEGRMAH9056vsYkjR5nrCBMqpg9PL+vx2RU9s1gWx04u/FlrY+Z9nIsT+16e+IMrt2x6z0Xnncfm5xdkY5K3tTfnL33ihYk7BgYG9PDw8NkDCACjo8BffXir9aWHDr182YXd16eZbm9syKqOhhSzGSHXtR7rtl0FkW2G0QoKGswYcAYEMkLCEjj46EM4MvIsVnV0whgQOYIRcba4WKFSpAKy7CNGy+mXj072X3vB+tXvuGLre13ma+MkhC1EfE5HvifhWVN//ld37RsY6BPDwxNnRVTZGaP3cHGNBkBlYf+PdD6lGlKMNGfo2LQVa3e8FV5DKwRjIEYgArTR0AAcxwGpCELWsGXjGnQ0e1jVWUAuaaGr0UMqZ5swjngcRauSqexb1na1fU5k0n9bKpchODGPCK7rsGxSqHWtud8EwHfv3qvOlp88AxBDQ0PKGIO7vvH8d6PQjFqOy7q29On2i94K46ZQDQLEcQQQQSsNGUsAgOvYCMtL8CyDNT1tyDc4yKQYcmkXFjcmwQXZXPhRHI9YlnNfoalwy3MvHbD3vzSqLFvQ8RPHMD83y6uViDc3JNZde8Wm84nI9Pf/cG9nBeAP/Rco0lq2rVqPdduvAgkXYRjCr1QQ+lWENR9xEEIqCRBAWkNVl5DxGCxHIJluhDQCmrlgXFDsByCirGPbN52cOnWgWqst5RoyblNnO6v6Pgq5rM64lnzkqQOTQRjzqy5a1XQ6PMBZBzg0tIsRAYp7J9s3XYCj45P6yMsvYW78JMqLC4gDH7VqDYILaCKEsUTklxGXFkAyhkhk0dC1Dki3IrQKiEUOiVS6WvP9ZznjEUCN5erKnS2NGU7MyMnpSZXPplkUR+LAicWnRqfiQ0cnl6cBoLd36KwYGvHqD/39ewxAZvX521hL93qM7z9GX/3yV8BIYMO6Htyw6zrYCQtxWILgDpTRMCaGrlXAhEC6vROOl0euZDC2Mo2WtY0m29bhzfv/HJ2cXGq0bHbB7PzCrc0p+/p9I6PdKx2NKCq+8OTzI/fOl8xdD/zDP48AmANAZ8sfvhogMcZ0oVBo23TRjiutTDO2b89yv1zCg9+8H8898zxa2vLou/oSqFgj5aUQG4a4UoXWQKKpGclsDlEthlaxUlpSvrmVpb1WeqfwLv3yl+8qBXGwKp1usovlxcGqL/4oYMmBLz3x5L21+drMjwUfZ81NiB8GvnvYrl271PtvfPvWNevWJwNJWpNkV157FTZt2ojjBw7i5dEXMTezhLUbNkKTDRVLABxkJ8BSHsAdaFMxE6dO8CNjs3jppSN6buaEOmfjudamc3uTT+978olUyv71UFlLsUTf954+fAAABvr6BIaH9WAd2FnNM18BODIyQgBgO3ZvOuEZwUj7ANOMoa2nE7YwcFMOvFQOViKNWhhDG4ATR2QYuCTIEHpipsieeuHw1/7x0YOPZZLWgBDSOvX0M5OOcE4mM14/cX1/HKd3T89M1/r6+sTw8LAaHB6Wr1c28QrAc8891wBArVo6GQQBpVIuEQhQgIKBnc5g4wUXQngJSK0Rx2H9r19FqVLDwnLZHD4xT3vu++7cA4++fPfa7vZ32Mw0B7VoLGL4p4iqwrZZb6XCP7K4OF0DwIdfR2CvdYIGABRwrFypIOmlGYhgYKCUgeUkIASHMQStNeIgRhBJBNUa/CBGNYxpdtnHqZmic9Hmc761qqMTtfIKvJTTINzUTYcPH2pZWpm5eXExLvcBYhh43cH9hBUFgMcf37/4/vdOor21mZQEiAGcWyAhIGUMJTUq5SpmF4pghqAihcgIzC3Oo1STuOzSN2eXS0U4NledbTluJ6zCgaNjUCY2RvPjQEzDb2A95xU/ODg4qI0xbGTk6PFjR8Ye1ohhoBVjAgAhlgax1JBKQ8YGsTQo+RKKp0FeIxarGlPzZZycmkepEiCIFY8Yw/7RI/rEyQUD8FLZD146bUT0Gw4QAHbv3s0A6LHjE18oFldgOw4AQCkJrTWkDOHXaoiVhtEEY4BqoDGzHCLfuRFjM0VzeOKUrAYKXjqLI0fHMTs/b2yHSJvoxZWPDKyc7XTo5wI4OjpqAOCx73//xOzMPBxhsTiOEYYRlJJYKS4h9GuIoghSSlRKFYRKImRJHJjxYVLtZqlci2YWizg0No5ISUAZOI5BtrE5xOCg7u/vf0Orca8V0JLjOIwxBhlFiOMQAEEQkEmnQYxjYX4BtVoZiaSDpeUSZopVzFciJPPNrKlzlRcZgyCKABMhk+LcddOqY/2Ot2y77KqBoaEh1dfXJ/5dAN5ySy8BMFft7Luiva0V1VpNSRnDdQSYVvj+4/twxx334DsPPoQDI0cwMz2LkydPmemZKTSkPSQSFlrbO+E6NpIOIZeyIZhGIp1ngUjqZEvHJ7u7u9c8+uijcuvWrdYbbUVp587dqq3t9kJv77mf4JyjFituuw4ICt/45gP4wu13m2KlpuM44plsDk2FRtgJj+ZWqnr9eUkmGOAmDCxLgTQwPb2EppZOePkmmimu6EQyb3Wft+XTJ06c+OXnnnsu7u/fw4d6RwwGB83rpZf8zJvvfW9ArFlzlf6dj/3arddc3Xd9rRbKhJfgju1iZnoWt3/5Tswt+dRcyLMwCLC4uKxPzcwdnllYVNVqNW1gdCqTJAs1+MtTiKtltLR1ItvRhbKvEMWcKWbrfHPn5lUbzrvGTXmn9n73M0fwSnnCUF8fxMTNO4GzWLIQrzo9bcxgYsv5m29NJBLG94sMAKSSKJfKZrm4SMmktdDT1fxUMimunZyaY9Uw3jC/vPL3BvHFxYXpDV09rUYGNepoziGT6YGdbMD0cgUGLpSMYJmQlauWbuxYcwnlG/6xoWPdt+dGn/pjgfkfjI5SZXgYEsPAwMAAGx0dpaGhIXVWAA4MDHAikrd86H0fvHTH9o4wChTnjGslIaWCVFo3ZTN84gcjTzzzzDOfWbem4zLXS+Vci76Ysc0dpdLCZ1Qu+wTpKKlkbBoLzSSFjaVaDdAaRhHIcHCjAFVlcXVZ2zwHt7vtOsbFdZNHR6YvuHz7fKEh9VR1+eQXBwcH9wMAEcMVV9wmhocH1b9VhAkAM8YglUoVvjn01wd2XnFpw9TMDOI4JCEElDKoVX18455v4omnnzVRDBofP17zw+jI7FzxgrVr1twRxNXGdHPzJRs29ObyKW2YjCgGR6lWgVQOpud8ZBtbQVwAtg0n2QiyHISKKct2af7kGBvb/+R3urtbN+Ra29ckKL5r8fjoF5555vnHzmy0b2BADAMap6vkP7MOGmMYEek//PTHP/O+/hsu931fW7bFwjBEEPggYiguF8E4w7Fjx+ngocOTJT/8bCy1DIPwW1LLK7NN+bc1t7blC/mUaczaJI0C6Ri242FypgIwF+lcEoYItp1ABAYmOJgGU1KZhnyjCf1S+eXHHry4puwwXWi9tWPTJf+pZ9OF17d3tGVqkwfHRh8eLmF42AwMGDY8PPgz54yCMaauueayrVe8+dIPKw2ljWYEjTAIwBihVqlgZnoWBw8cxJo1PagFYcPhI0c/0FxoTrR1dOxlNr+A2U666oemvTlJG7rbYBiQSeXxnUeeQaXqY9vWXpQrFfiGITYGRmsYqUDQUMqwSAvZtW7j1uLs1P+aPfjMR4oLs6e2XHb93/T0br/I61hz0Y5VGz4el2e/tnDkha8ODtJzZwidn0VHOQB89Dd/41PXvrVva7VW0tDgjDEoJeE4DhKei0q1hrFj46gFEZKeZ60/Z03Thg2rc296045VW7ZscuKwbFRQobdesQOb1vRgzaoe5JvacP8Dj6Dvsu149zuvQFdbHkRAEMZwLQ9xJKGJwYCglIbtJuGXi02LJ498SddW9mkZn5tqKJwbWw2hsAuZbKHzEq9xza8V2rvOnyse3/fiM88v9fX1iYmJf7l+ygFkbr31g3/R3d2WDsMaGa3JGA3OOebmZpHOpNGYb4AQHOPHx3HkyDGAk+7u7kQq5ejQr1BQKdIVl21H74b1cG0L2YZGvDR6GJVyCTe99wa0NGbQ1JRDQy6Fno5mbFjbDc+th6R+oKC0JkbCADpfXJx/LK599Hileu8ztpX81WxThydNoIMQmrkplmld3dtcaHs/Sf/JHzz7zHhf34CYmBj+qSD5u951zTt/6d3v+KDjWJoAZlscWkkoFSOKJIKaD1tItLU24LzzNmLb9guwfl0PdbU3U0dbE2st5Glz70Z0dXaCcQE3kYDSwNTUDNasXoXurg4Q45BKIgwlGrIZ5NM2uppSyGYSODlbRDWQYEwoz/O4DJbLS1N//wCUWo6IRdl84Vov3WAMlFBSElNSbu3dnG5tK/xyqVIdef7pO0f37NnDh4aGXlsHt2276OKmxkbIWBrOAaU0tFKAVkgnE1hZLmH61BKaGhuQtG00rO4CFz3wq1WEgQ9OgCUYtFEIYuDFl0YRhSHWrduAxkIBQnAwLhAEPtKuC0OEahAARqEtn8aq5gyWlmegVMiF4yCZabgOwCeMMRUiun2xvfu30vmWTnChCcQEItFaYHp7b58FsHs0d39v165df0hEMMb8BM/IWgpNFwubw2hNACBljCiOoLSC0jGSyQQskcTSUhmLC4sIajWEQQgGBsEFoijG4lIJ4xOTePqpZ3Hk8AR6Vp+D1rZmMAZYlkAQhNAaSCUTSNgWDAGaMTTmUljb0QyLFMhIglHGdtwukU5vJiIDoDo/M/nFyvIcLGY0tERCEPIpxjpyNq664lK69rpf+vRbf/Gme40xeSLSPx5fs/a2fBerV+rIaAOtDQgcjAm4rgsyCq0tOXDBcPDwMRw7dhITYycxN7OA2elFzMws4fDh45iemkdjoQnXv+vt6O7uBBGDZTkI/BBSKjiOCxAQywgWAUlXIOVZSHscFgegDVI2U7ls2qSSuXUAaGBggC1PjP3dysxk2WjNYYzJJV00ZpIQHLSmLUVXvmlL/J73vu+Gm275re8aYxqMMebVvAbz3EQbIwOlI9JGgnGCZVsg4rC4DcdxUCkvw3MEVrW3otCQhQawsFhEsVSGnUhi9dq1OH/LuTh/80akkh4ADSJCFMXQxsC2LRCZeuKsFCzG4bkupNLwXAe5tAsVh/ASFvX0dFJjIf8eAGb37t0G8GdN6E8rJYlDm+bGFAwpKALSnsCatqS1ujMTXXf9Ddvee/Mt/0BE1N/fz86AZBqccyEgOIfRGowxMM4hhAWpDDQxCDeBqcVlrPgRQqlhMYZzVq/ChedtQk9HE1oKOaTTKdjCgmM7YIwjiEIQ1dknxoAwqpM3yih4XgKe40LJGI5F6G5pgC2AaqnC0qm0aWlteRuAc06LqQzCYFxGERwLprstD0CiXC5BcEJDykKDo+3GlBXvvKrvmive+rbfOJ1zcgBg88XimCFmhHAMwKCUqYNkBG0UDAyY66GiGOZrEuNzy1gJFB586BE89PAjmJtfgIaBbdtgjCEKQ0RRBEtYYIzBmPrJxXEIqWIIwZBMumDEwACkPQstDSk4nFCr1qi4XEI212A3Nrc80rHmnGcS2ewNQrANxgDcSJZ1GTxhQUkJQwRihEwqgbRj+KquVn3elos+DiC5d2+dgmM/eP6FO0srJbJtW3PBoZUGDEEbQGkDowAVSnDuINfchHRjEyiRwtiJk3h833OYnJ0D2Rb8IEClVEZQrUEwBiEEjKmrgtEaWmkIbiOVyoAxDkDDcV3Yto1CPoeELeBHESq+T1LGSGWz3V3rN21v6V5/b6GlZRVBIedx8jwGrWN4ng3OAcEFLMtCIsFY1rPMhg0b2rdc/KYPEJHZunWrYF+8/Y6/3P/CyHHbdRhnjj7z1LXWgAGMBuJYQykFqeoWOA5jMDD4tRBL80VoqUCMYHkuEpkUDAEylmCMQWmNKJJIJJJIJJKAZgiCGFIpcC5goJH0LDTmUyBSYEzDGAnu2Drf3Kp7Nmw2XjptmAnR0ZxGyrVgjIJj22CMwJgB5wTHFrAFTDaTMu1dPTuJCO985zsND8MwaG8rhFu3nv9OwW0t44hpYwBjADL1m3FCNumikHXBocGI0JRLAVqjZ9UqtLa2wnUTIMEBIjDOQSAoZaC1hCVs5HJ5CC5QrlRQCwJYXMB2HMSxxKmpGUwurKBc9eE5HDqqQRFRNt9KsVakjaFcysK23m60NKQBMHiJBJIJF4T6XjkjVP2Q5osVmjgx2TKy/9kv7N27NxKns4mvXPHmHb/7tmve0h1FgY7jkBERtDYwRHAsDsd2oFQAizP4boiO/Hqc17seXFhgnNd5Cs7rzwUEpeulRqMNEl4SnuuhaqoAgGq1BtdxoJSGMUAYSZSWi2BGAUrC9Ty0t7fXP2sJRhYKGQcthWw9brVsMBCgNdQreR8BAHmupbZccEHz1NVv/y0i+p9s7969jIj8A4ePDgGAbVlaygBKReBcgIyBAcCFACMGoTVcRtCybvIJBkpLSKNfcT9KqdMuIYRtWUgmU9CmDpYBsDlHFMUIpUSsNKIogudaSFiAljEsYcEWFrQKIbiAII2ulhwyXgLGaBAjMA4oFSMIAmitoY0BtELOs9mFm9ebq6/e+bvr169fzWu1Go2MjJgoDqYuvPDCD6VTXAS1FdJSQ1gWwABiDExYCGo+tJQwhkDEwSwBzQiaCJYQABjCMIbSGpwzGAOkUlnYtoMwjBBF0Q/1m+rrFpdXML+4BAWO5eUVMFIAYkgpEcUGUSyRzyVx2dbNyGUS0AYgGLiODa1ikDGwXRthHMEPQziOTWnP0c2FFnt6dr4mTjcfEBG9PD4xefCcNU2bZRxpVzAWVVYgvARIMMRhBYFfgeO4II06AAZoGKg4hgwCaKFgwOvxJwGel4btJFDza4iiAIwz2I6AFVmQWiOKQkRhgKSXABaK4BSDERBEEZQ2UDKGMITe1a1ob83BQCGWEgRAKwUlQ7hOAlJKyDiCa1vgwoIBKJtxTEtT/koBAHv37uVEkMtLC08lEunzGLgmFTEbQFiW0I4DGfsI/TI4IzhuAlprBNUqIt+HiiXsRBLZ5gKYsE/rgwHnAmEQIpYRbNuui6/WSCRcrJTKqPk+GGP19hQdQzAFGav6aWuC0QZrOtqx/fx1sHjdbUmpwA2DX6mASMF2HIS+DyIg4VggZiFWhhybKJPLtnMA6BkfZ3vHJ3TC4eaSi7e/P+m5emVpiXEyAGmEvo/Ar0JLCSVjxFGIwK8i9KuQcQTGCKD65okxuM5pUSICYwxEBKU1pFIgIhAR4jiG1gbKaKyUy1hYXEKlUsHScgl+oCA1Q1MuibdfeTG6OgpQUgHgCPwAKg4h/TISXgKWZUHFMSzbgeO6sLgFqRQiKenAoWMlBgCDw8PSGMPu/vp3/vGfHhp+ItvQKKxUVgUgxJrAOAFawRgNFUeIaxXYMEg5DsgYSBmBoBGUSqgtLaJaWoLRMQANpSJEcYgwDOuiJOu0IOcAEwZ+UAaxGCCNYqmE5VIZsTIwRmPj+h6cs7odZAAhGOIwhIwChLUiSNaQcR1AKjDO4SY82MIFwMA4QxhGmF9YiPmrK2yPPfaYmpqZeeK889b9566uDqtU88E4J8u261GJ1pBxiDiOwBmHkgpCCCQTHgTjIAYoLVGrLiMMfSitwRgHJ1Y/rdMnGCsFGUeIpcJSaQVzC4s4fGgMExOzAAQsLkDQ6GrOY1VXK4RlQWuNleIywiiEFVXR0phFKp2GZha8VApeKg2l6vSeUsZMTM3T3r1PfPdH+MFHHrlNPPvsS4fuf/ChP+JCM0tY2o8jkJNAOt8MEg6kAZQBamEExTiY60E4HlzHRcJxIcBg4hh+qYSl6VOYPTmOoFqGLThSSQ+NjU1Ip7NwHAcwhOViDWPHZ3FycgG+74OgAa3AlMKpk6dQrtRgCRvVahVxGMBfXgQPfCQtC8QE0tkMXC8BbQwM6uIPkJmcWcD8Utn8CMtz5ZWD6rTj/+xVfZffcuklW1qPHD5sVpaWyXZteNmsibXUYeBzx0nA89LwkklooxFHASJfIoxjSGVgwOClsrDdBKRSqFZKcFwPQrgQp6MYbcrgzILrZGBbHoBFGCWhWQTLsl4pSNV8H6WVMsIwgL84D6cxC+HYcFMpJNJpSAOEoaqfoFQwRrJSpYII7M0/Tp+Z046/Mru49EAynUMun1fVcglHD4xi7NhRauno5NnGgmLCBWMWfD+EBgN3PMCyoG0bViqLTKEJ6VwDvHQGDY2NIABBrYIwDOr9YoyDCY7Va7rR2d4Ky+JgVLecIAVucdiOhVpQg1+tIKpUsDw/h6i8AkYGjJ1xRwyWZcFxbDDO4YcB4igkzjiUNs2vwQ/uhTGGJidOHIyiGLl8DoaRqVV83Hvv/eNf/eq3nkylGngqkzYGzJAQCMIYcaThJDNIZhqQSGUgHBcrlRJmF+agtIbtJcCEAGP1W8pQoSGdQUtTAdoocE7gDOCs3uCXTCQgGKFSLqOysoxqcR7R8iISxGA7NpSUCMO6CyJmwAUDkYHUEn4Uac40ZFx76CcAfv7zowaA2f+D/S/Pzs4YwSyWyzWq5rZmKFLPfPy2z1z2F5//8h+cnJojx3OgTD0ijOMAgV+rU9xRjDAIYbRG5PuYnpoEjIKbSMK2HSgpwYghk0qBG0AqBWFZsAXBdQgJu/7eIobQD1BeKdYzfs6QsAXABKSWiIIqjJYgIgjO65JhAKUMrSzNYX786P/9CYC9vb0GAIpz86OLi0XNOLFEwjXCdqCAA4wx/ad/9pXb/vTPbr/xwKHjyKaTTIApbjFJMJILoQBopVU9HeSEKApx6tQJLC4uIJYhDAHJbBqGEfwwgGMLODaD5zpwbQHBAMENtAxQnJuDS0BLykPOs8EEQ6VaQbWygjjwYZQBgYGoXlBjDBowtFJcGZ+fnn7ip1LJEXeSjHHSWsJAkdIGVV9Oaa1pz2c+6u762Gf35HItVCwX/7i9tak7n8sg4dpInHYfYRzDD5VGveqBKIyZqawgrDawRDYHYkAUx7AtgWzKQzrlYdFiYAQw0uCkIGMfS7PTqCVtNKdswwWMlqSDWo1k5EOpkBMHOCdIGUOqGJzDgIBisbQfQPW1ADJjjPnYRz54cVd3JzMwkjFGjHO0tHScAGDQdSra09/Pd905dPdX7xx68D03vu2C1nxme3dbR29nV3M+kvGOhOfms7l0ojHXwFzHQSadglYSYVyBLVMgw6DiCJyA1uZGNOazmD7JYHELRhtUS1UslSvIJW0dtqUhsnnG3CSV4jKbLs6h012HhJcxSqp68cMoMBhYgsziYhFzs7OPv2Yj0HXXXUdEZP76S39yc2NzHsX5IiXclBGCY2Gh2FLvipqjwaFh2d/fz++5557y1+/+7mMAHnvVMl5Du9t4xfbtvVs2b+7NZVPbXVdckEmn093dPe0XtHSxOFaI4xiCC6S8BM7ftA6tGRezc0W8fHAMc3PLOg59U/Ut/uLxGcxXq3NLy5Xpck0+MH5q8sVJ3776xvc2fyjLoeIw4KaeaBsQ48ePj8X7n93/nZ8A+OEPf9jatm1b/Cs397//LW95S5+STFm2w4kg87k8Crnsxvp/7gQwjNPsDvX397Pe3l7auRPYufNcw9iNteJUULvvvsdO3nffY999FdlqfeJ3btl94QVb/rsxWgohhOACBINCPguPa5yaWtKRJKMMcQgXS5XgBw8++uLvHRmbfALA8pm9fmfvyN3LtWDqv/36TQOdXQnNmcsc20YUhVQtl5dmZmaOE9EPAQ4MDLDBwcH4+ndc/YFbPvQrf7Oqp0v71Rpj3AIijZbmDt3a0t4GADt37sTg4OArvvMMjfXDr0ADA6DR0X7q7e2l3bvPNUA/GGP+ifFTk1EU1y2fEDBaQxmNUqWK2dl5M7tQZIYYisull4LQ/+LxoxNfOj23CEaE237/CrF3L7B3714Q0e51azqv/eDN77uYYCnBOeNMwBKMn2HOxBmu7VOf+pS68LwN226++X1fPXfjOTQ+NmpyuQYqr5TAiCvfr4lT01P7TqdX/xotZwYHYYAhnAG+p7+fG2Mok03vD0KJpOdyIgZpJCzbQhBE5vDYSTpybPyJlXLtrw+MHLwLQPiqAU6tjTGDg/UOxd27dwsiwv4XXvjT2emdQ20dqwFlyGJCt7V3Nfb09Jw3Pj7+NKv3x9xCxhjc8J53/JdLLzlfn5o8HszMHtOLc+PSLy+CeOx8/ZvfPvR/PnfnHcYYGhwc/LmbA0bq7se8OHpobrm0gmQySYwIQRAglUwrS7h06PDxbzw6/PRlLzz/0t8BCE83DNHQEH6Cox8cHNQGwP33PPr42JGxspEhV3FsojjWhaZW2rxl89Wv0emkWBCt8CgsuwhX+NjEiHjh5UPRHXd8676v/e3Xf4GIVnbv3v1vajkerPfC4Pvff7ZYq5VLjBkEYc1wzmDb3KRSadSq6h4iwrXXXusAoNP9pD/tXoYRYb5Wm52ZnZ8NKxXEcWAiGVJ7RzO2X7L5yldE9Morr1QA6G8+96VPhpEvUgnqiWrLx49PTjw5/NiR742PLx46o1uDP2cTwI/4H8agtV6ZOjW5dOH5mzJSxXATHkCctFbgnErGGKTTaflzPETuByHngiEOJOIYMMyA1+dWXjEyBgBOLNSmP/2Ht9/0GrOAbPduwv9nJ7xRSnEiCqPQ38cY6/G8pCJiggkLURThNBfxc68baaUjBYRhBANhZmfncHT0+JOv5Qdpz549rL+/3wBDtHv35wgY1qd5t7NxmXpzkWkhsuE4HikVw6Be2qhWK00/12L1xyEyDTkriA38MAQ5xKanZ/Hc/hcefi2AZteuXQqvw2XMmbEFr62lrW2HAYfjOjzyCUEcGcYZMpl0y+l4+F9tuezv72d79uzR55+/cX0+39hZ9SNdCSSE0Wx2dm7xxdHR/UR0duaDfpZr165+ZozB9u0Xb+ro6HC1ibU+XbglIjQ05JFKZVf/rOv19/eDiMy7rtv5ye7Obub7FVOqSP3082N4/qVDTwOo3n333fwNA3gmSyElg3KpiHJlhap+tc4VJjxqas6jo6N9/Wkf9y+qxJ49/XzXrl3q5ptu+I2rrrzsxjCMVawi7iYslGsRJk4szwHA50ZG6A0DeMZN7H38sbGxsZeqGpKSibThwgK3LCRcrpuaGpI/izG+8cZ7VDKZbLn8zTv+d3dHt85ks5RO59DUmKOLd5yDjZs6OgBg7+7d+g0DODAwQABwTd9lGS6YfWpyShWXiubg4WP6xOQpOXlqgh05dOjx06N+9C+sw4wx+MB73/XLne3tnu9XtW1zxskCN4YVshm0tbZuBuByzvQb1lp85krkXOP70po8MY5SZhlhwOCHK86937j/vi//3dAnBswA20W7fqqInhlgkRRd62U8Y3GilaUiwF1oKeFmGtGYTdoAXGMQiDdQRLUxIKKHj/q+uWH16sJ/7erqWuc4Xnzk0Ni3//wv7/gkEclB+pcb7c6MICkVPuFXileZpK28RIIFsSbGuWlqatGWcPOw0WIis/yGniBRfePf/OYj9wG4D4BdH7aBOt3I86+GgWcC/dnJ+SMIAhaFZVuTRsJtwPGJE+zEXBkvvDQaI8ISEf37/OBGf38/37Nnj2GMaSLCbbfdJk4H8D9LJEMAkM1mcx/4xau+5KWorbG1a1NHR0/D0/v2HTlwaOqpUs3/3rNPPv23AwMD7P8BcjdYkJcVtv8AAAAASUVORK5CYII=" class="fw-icon" alt="Statoodle icon">
       <div>
-        <span class="fw-badge">EC-TEL 2023</span>
         <div class="fw-name">Statoodle</div>
         <p class="fw-tagline">
           Learning analytics platform extending Moodle — quiz performance reports, item difficulty estimates, activity log analysis, and a behavioural warning layer for online assessments.
@@ -1287,6 +1297,7 @@ IoT security. ARM. STM32. ASan UBSan MSan. Ghidra. Docker CI/CD. IEC 62443.
       </div>
     </div>
   </div>
+
 </div>
 </section>
 <hr class="s-divider">
@@ -1376,7 +1387,7 @@ IoT security. ARM. STM32. ASan UBSan MSan. Ghidra. Docker CI/CD. IEC 62443.
         <div class="ti">
           <div class="ti-period"><time datetime="2016-09">Sep 2016 – Jul 2020</time></div>
           <div class="ti-org"><a href="https://web.unican.es" target="_blank" class="ti-link">Universidad de Cantabria</a></div>
-          <div class="ti-role">BSc in Telecommunication Technologies (Telematics) — 10/10 Honours</div>
+          <div class="ti-role">BSc in Engineering of Telecommunication Technologies (Telematics) — 10/10 Honours</div>
           <p class="ti-desc">Thesis: <a href="https://repositorio.unican.es/xmlui/handle/10902/19013" target="_blank" class="ti-link">Accelerating PageRank with ZCU102-ES2 FPGA</a>. HW/SW co-design with Vivado HLS. Supervised by Miquel Moretó Planas (<a href="https://www.bsc.es" target="_blank" class="ti-link">BSC</a>).</p>
           <div class="ti-tags"><span class="ti-tag">Telematics</span><span class="ti-tag">FPGA</span><span class="ti-tag">HPC</span><span class="ti-tag">PageRank</span><span class="ti-tag">Vivado HLS</span></div>
         </div>
@@ -1385,6 +1396,8 @@ IoT security. ARM. STM32. ASan UBSan MSan. Ghidra. Docker CI/CD. IEC 62443.
     </div>
 
   </div>
+</div>
+</section>
 <hr class="s-divider">
 <section id="contact">
 <div class="wrap">
@@ -1485,17 +1498,15 @@ const obs = new IntersectionObserver((entries) => {
 }, { threshold: 0.07, rootMargin: '0px 0px -24px 0px' });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-// Nav highlight: scroll-position based (fixes "papers goes blank" bug)
+// Nav highlight: scroll-position based
 const _secs = document.querySelectorAll('section[id]');
 const _nls  = document.querySelectorAll('.nav-links a');
 function _updateNav() {
   let current = '';
-  _secs.forEach(s => {
-    if (s.getBoundingClientRect().top <= 80) current = s.id;
-  });
+  _secs.forEach(s => { if (s.getBoundingClientRect().top <= 80) current = s.id; });
   _nls.forEach(a => a.classList.toggle('act', a.getAttribute('href') === '#' + current));
 }
-window.addEventListener('scroll', _updateNav, { passive: true });
+window.addEventListener('scroll', _updateNav, {passive: true});
 _updateNav();
 </script>
 </body>
